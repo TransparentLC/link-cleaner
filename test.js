@@ -21,6 +21,7 @@ await Promise.all([
     'https://m.do.co/c/6b173b2d7e5e',
     'https://qinlili.bid/redirect.html?target=https://greasyfork.org/zh-CN/users/455225-qinlili23333',
     'https://weixin110.qq.com/cgi-bin/mmspamsupport-bin/newredirectconfirmcgi?main_type=1&evil_type=100&source=2&bancode=9e6575d90e213289f4cb9e9407648472a099ba671a74cffc599b483c2bbcc110c0e6d18b3397d39317f905f44f68a256&scene=45&devicetype=iOS14.2&click=fae13ab58cc731ee6445e46f88d754e5',
+    'https://outgoing.prod.mozaws.net/v1/d01b4e0d4529405f12016274ffeec95d98ef36bd9bfc37210e3cd0b4aae3fd19/https%3A//github.com/filips123/PWAsForFirefox',
 ].map(async testcase => {
     try {
         const ts = performance.now();

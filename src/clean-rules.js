@@ -30,6 +30,7 @@ export default [
             'share_source',
             'share_tag',
             'unique_k',
+            'track_id',
         ])),
         clean: cleanFactory.blacklist(new Set([
             'utm_source',
@@ -46,6 +47,7 @@ export default [
             'share_source',
             'share_tag',
             'unique_k',
+            'track_id',
         ])),
     },
     {
@@ -173,5 +175,10 @@ export default [
         name: 'Qinlili redirect',
         match: matchFactory.hostpath('qinlili.bid', '/redirect.html'),
         clean: cleanFactory.urlDecodeSearchParam('target'),
+    },
+    {
+        name: 'Outgoing mozaws',
+        match: matchFactory.hostpathRegex('outgoing.prod.mozaws.net', /^\/v1\/[\da-f]{64}\//),
+        clean: url => new URL(decodeURIComponent(url.pathname.toString().match(/^\/v1\/[\da-f]{64}\/(.+)$/)[1])),
     },
 ];
