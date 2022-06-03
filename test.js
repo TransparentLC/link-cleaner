@@ -25,7 +25,7 @@ await Promise.all([
 ].map(async testcase => {
     try {
         const ts = performance.now();
-        const cleaned = await cleanLink(testcase);
+        const cleaned = await cleanLink(testcase, true);
         const te = performance.now();
         console.log(`\x1b[36mTest case:\x1b[0m ${testcase}`);
         console.log(`\x1b[92mCleaned:\x1b[0m ${cleaned}`);
