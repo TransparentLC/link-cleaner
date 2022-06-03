@@ -159,6 +159,32 @@ export default [
         clean: () => new URL('https://www.linode.com/'),
     },
     {
+        name: 'BandwagonHOST afford',
+        match: matchFactory.chain(
+            matchFactory.hostpath(new Set([
+                'bandwagonhost.com',
+                'bwh1.net',
+                'bwh8.net',
+                'bwh81.net',
+                'bwh88.net',
+                'bwh89.net',
+            ]), '/aff.php'),
+            matchFactory.hasSearchParam('aff'),
+        ),
+        clean: url => {
+            if (url.searchParams.has('pid')) {
+                url.pathname = 'cart.php';
+                const pid = url.searchParams.get('pid');
+                Array.from(url.searchParams.keys()).forEach(e => url.searchParams.delete(e));
+                url.searchParams.set('a', 'add');
+                url.searchParams.set('pid', pid);
+            } else {
+                url.pathname = '/';
+                Array.from(url.searchParams.keys()).forEach(e => url.searchParams.delete(e));
+            }
+        },
+    },
+    {
         name: 'DigitalOcean afford',
         match: matchFactory.chain(
             matchFactory.hostpath('www.digitalocean.com', '/'),

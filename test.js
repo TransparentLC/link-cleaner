@@ -1,7 +1,7 @@
 import cleanLink from './src/link-cleaner.js'
 import { performance } from 'perf_hooks';
 
-await Promise.all([
+for (const testcase of [
     'https://hellogithub.com/periodical/statistics/click/?target=https://github.com/rvaiya/warpd&utm_source=test',
     'https://www.zhihu.com/search?q=pd2.0&search_source=Entity&hybrid_search_source=Entity&hybrid_search_extra=%7B%22sourceType%22%3A%22answer%22%2C%22sourceId%22%3A2485554266%7D',
     'https://link.zhihu.com/?target=https%3A//rust-lang.github.io/mdBook/',
@@ -22,12 +22,14 @@ await Promise.all([
     'https://qinlili.bid/redirect.html?target=https://greasyfork.org/zh-CN/users/455225-qinlili23333',
     'https://weixin110.qq.com/cgi-bin/mmspamsupport-bin/newredirectconfirmcgi?main_type=1&evil_type=100&source=2&bancode=9e6575d90e213289f4cb9e9407648472a099ba671a74cffc599b483c2bbcc110c0e6d18b3397d39317f905f44f68a256&scene=45&devicetype=iOS14.2&click=fae13ab58cc731ee6445e46f88d754e5',
     'https://outgoing.prod.mozaws.net/v1/d01b4e0d4529405f12016274ffeec95d98ef36bd9bfc37210e3cd0b4aae3fd19/https%3A//github.com/filips123/PWAsForFirefox',
-].map(async testcase => {
+    'https://bwh81.net/aff.php?aff=46048&pid=87',
+    'https://bwh89.net/aff.php?aff=13457',
+]) {
     try {
+        console.log(`\x1b[36mTest case:\x1b[0m ${testcase}`);
         const ts = performance.now();
         const cleaned = await cleanLink(testcase, true);
         const te = performance.now();
-        console.log(`\x1b[36mTest case:\x1b[0m ${testcase}`);
         console.log(`\x1b[92mCleaned:\x1b[0m ${cleaned}`);
         console.log(`\x1b[95mTime:\x1b[0m ${(te - ts).toFixed(2)}ms`);
     } catch (err) {
@@ -36,4 +38,4 @@ await Promise.all([
     } finally {
         console.log();
     }
-}));
+}
