@@ -81,6 +81,29 @@ export default [
         clean: cleanFactory.urlDecodeSearchParam('url'),
     },
     {
+        name: 'Tieba link',
+        match: matchFactory.hostpath('jump2.bdimg.com', '/safecheck/index'),
+        clean: cleanFactory.getRedirectFromBody(s => s.match(/<p class="link">(.+?)<\/p>/)[1]),
+    },
+    {
+        name: 'afdian link',
+        match: matchFactory.hostpath('afdian.net', '/link'),
+        clean: cleanFactory.urlDecodeSearchParam('target'),
+    },
+    {
+        name: 'QQ mail link',
+        match: matchFactory.chain(
+            matchFactory.hostpath('mail.qq.com', '/cgi-bin/readtemplate'),
+            url => url.searchParams.get('t') === 'safety',
+        ),
+        clean: cleanFactory.urlDecodeSearchParam('gourl'),
+    },
+    {
+        name: 'QQ docs link',
+        match: matchFactory.hostpath('docs.qq.com', '/scenario/link.html'),
+        clean: cleanFactory.urlDecodeSearchParam('url'),
+    },
+    {
         name: 'Youtube link',
         match: matchFactory.hostpath('www.youtube.com', '/redirect'),
         clean: cleanFactory.urlDecodeSearchParam('q'),
@@ -133,7 +156,7 @@ export default [
         ),
     },
     {
-        name: 'qq middlem',
+        name: 'QQ middlem',
         match: matchFactory.hostpath('c.pc.qq.com', '/middlem.html'),
         clean: cleanFactory.urlDecodeSearchParam('pfurl')
     },

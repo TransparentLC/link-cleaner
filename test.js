@@ -28,6 +28,10 @@ for (const testcase of [
     'https://clientarea.gigsgigscloud.com/?affid=1263&cmd=cart&action=add&id=333',
     'https://www.oschina.net/action/GoToLink?url=https%3A%2F%2Fseanlook.com%2F2015%2F12%2F14%2Fmysql-replicas%2F',
     'https://www.360doc.cn/outlink.html?url=https://quote.cfi.cn/quote_600519.html',
+    'https://jump2.bdimg.com/safecheck/index?url=rN3wPs8te/pjz8pBqGzzzz3wi8AXlR5g1NgdDpM6gxIAXd05dt3m/x7iiUNBMf1rkVvOVeukx+fZa0Sr789sq5GvedOpCizeTDeOnqzMKitN/uxEXeos4Y5iD94p2hXY2AgCtjpDKkO+gYGq1Czi81SWSJ8XLuLbfSBwGF9mAgJ2Pah4egTNMg==',
+    'https://afdian.net/link?target=https%3A%2F%2Fexample.com',
+    'https://mail.qq.com/cgi-bin/readtemplate?t=safety&check=false&gourl=https://example.com/&subtemplate=gray&evil=0',
+    'https://docs.qq.com/scenario/link.html?url=https%3A%2F%2Fnyaa.si',
 ]) {
     try {
         console.log(`\x1b[36mTest case:\x1b[0m ${testcase}`);
