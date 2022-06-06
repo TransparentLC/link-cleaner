@@ -66,9 +66,19 @@ export default [
         clean: cleanFactory.getRedirectFromBody(s => s.match(/<body data-url="(.+?)">/)[1]),
     },
     {
+        name: 'OSChina link',
+        match: matchFactory.hostpath('www.oschina.net', '/action/GoToLink'),
+        clean: cleanFactory.urlDecodeSearchParam('url'),
+    },
+    {
         name: 'LD246 link',
         match: matchFactory.hostpath('link.ld246.com', '/forward'),
         clean: cleanFactory.urlDecodeSearchParam('goto'),
+    },
+    {
+        name: '360doc link',
+        match: matchFactory.hostpath('www.360doc.cn', '/outlink.html'),
+        clean: cleanFactory.urlDecodeSearchParam('url'),
     },
     {
         name: 'Youtube link',
@@ -159,7 +169,15 @@ export default [
         clean: () => new URL('https://www.linode.com/'),
     },
     {
-        name: 'BandwagonHOST afford',
+        name: 'GigsGigsCloud afford',
+        match: matchFactory.chain(
+            matchFactory.hostpath('clientarea.gigsgigscloud.com'),
+            matchFactory.hasSearchParam('affid'),
+        ),
+        clean: cleanFactory.blacklist(new Set(['affid'])),
+    },
+    {
+        name: 'BandwagonHOST/HostDare afford',
         match: matchFactory.chain(
             matchFactory.hostpath(new Set([
                 'bandwagonhost.com',
@@ -168,6 +186,7 @@ export default [
                 'bwh81.net',
                 'bwh88.net',
                 'bwh89.net',
+                'manage.hostdare.com',
             ]), '/aff.php'),
             matchFactory.hasSearchParam('aff'),
         ),

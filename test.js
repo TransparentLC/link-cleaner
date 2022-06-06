@@ -24,6 +24,10 @@ for (const testcase of [
     'https://outgoing.prod.mozaws.net/v1/d01b4e0d4529405f12016274ffeec95d98ef36bd9bfc37210e3cd0b4aae3fd19/https%3A//github.com/filips123/PWAsForFirefox',
     'https://bwh81.net/aff.php?aff=46048&pid=87',
     'https://bwh89.net/aff.php?aff=13457',
+    'https://manage.hostdare.com/aff.php?aff=1945&pid=74',
+    'https://clientarea.gigsgigscloud.com/?affid=1263&cmd=cart&action=add&id=333',
+    'https://www.oschina.net/action/GoToLink?url=https%3A%2F%2Fseanlook.com%2F2015%2F12%2F14%2Fmysql-replicas%2F',
+    'https://www.360doc.cn/outlink.html?url=https://quote.cfi.cn/quote_600519.html',
 ]) {
     try {
         console.log(`\x1b[36mTest case:\x1b[0m ${testcase}`);
