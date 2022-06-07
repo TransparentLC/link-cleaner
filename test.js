@@ -32,6 +32,8 @@ for (const testcase of [
     'https://afdian.net/link?target=https%3A%2F%2Fexample.com',
     'https://mail.qq.com/cgi-bin/readtemplate?t=safety&check=false&gourl=https://example.com/&subtemplate=gray&evil=0',
     'https://docs.qq.com/scenario/link.html?url=https%3A%2F%2Fnyaa.si',
+    'https://steamcommunity.com/linkfilter/?url=https://www.bilibili.com/read/cv300189/',
+    'https://ref.gamer.com.tw/redir.php?url=https%3A%2F%2Fexample.com',
 ]) {
     try {
         console.log(`\x1b[36mTest case:\x1b[0m ${testcase}`);

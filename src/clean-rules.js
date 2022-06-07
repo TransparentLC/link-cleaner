@@ -109,6 +109,16 @@ export default [
         clean: cleanFactory.urlDecodeSearchParam('q'),
     },
     {
+        name: 'Steam community link',
+        match: matchFactory.hostpath('steamcommunity.com', '/linkfilter/'),
+        clean: cleanFactory.urlDecodeSearchParam('url'),
+    },
+    {
+        name: 'GamerTW link',
+        match: matchFactory.hostpath('ref.gamer.com.tw', '/redir.php'),
+        clean: cleanFactory.urlDecodeSearchParam('url'),
+    },
+    {
         name: 'Hellogithub link',
         match: matchFactory.hostpath('hellogithub.com', '/periodical/statistics/click/'),
         clean: cleanFactory.urlDecodeSearchParam('target'),
