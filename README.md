@@ -29,6 +29,7 @@ https://i.akarin.dev/link-cleaner.user.js
 ### Cloudflare Workers
 
 https://i.akarin.dev/link-cleaner/?url=https://example.com
+
 https://i.akarin.dev/link-cleaner/?title&url=https://example.com
 
 使用 `url` 参数输入链接，将返回清洗后的结果。
