@@ -34,6 +34,11 @@ for (const testcase of [
     'https://docs.qq.com/scenario/link.html?url=https%3A%2F%2Fnyaa.si',
     'https://steamcommunity.com/linkfilter/?url=https://www.bilibili.com/read/cv300189/',
     'https://ref.gamer.com.tw/redir.php?url=https%3A%2F%2Fexample.com',
+    'https://zhangge.net/goto/aHR0cHM6Ly9hcGlzaXguYXBhY2hlLm9yZy9kb2NzL2FwaXNpeC9wbHVnaW5zL3Jlc3BvbnNlLXJld3JpdGU=',
+    'https://zhangge.net/go/?url=https://example.com',
+    'https://p3terx.com/go/aHR0cHM6Ly93d3cudnVsdHIuY29tLz9yZWY9NzEzMzE2OQ',
+    'https://zouaw.com/go/tencent',
+    'https://wpjam.com/go/aliyun/',
 ]) {
     try {
         console.log(`\x1b[36mTest case:\x1b[0m ${testcase}`);

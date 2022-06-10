@@ -181,7 +181,23 @@ export default [
         clean: cleanFactory.whitelist(new Set(['__biz', 'mid', 'idx', 'sn'])),
     },
     {
+        name: 'Aliyun afford',
+        match: matchFactory.chain(
+            matchFactory.hostpath('www.aliyun.com', '/daily-act/ecs/activity_selection'),
+            matchFactory.hasSearchParam('userCode'),
+        ),
+        clean: () => new URL('https://www.aliyun.com/daily-act/ecs/activity_selection'),
+    },
+    {
         name: 'Qcloud afford',
+        match: matchFactory.chain(
+            matchFactory.hostpath('cloud.tencent.com', '/act/cps/redirect'),
+            matchFactory.hasSearchParam(new Set(['redirect', 'cps_key'])),
+        ),
+        clean: () => new URL('https://cloud.tencent.com/act'),
+    },
+    {
+        name: 'Qcloud afford short',
         match: matchFactory.hostpath('curl.qcloud.com'),
         clean: () => new URL('https://cloud.tencent.com/act/pro/voucherslist'),
     },
@@ -258,5 +274,20 @@ export default [
         name: 'Outgoing mozaws',
         match: matchFactory.hostpathRegex('outgoing.prod.mozaws.net', /^\/v1\/[\da-f]{64}\//),
         clean: url => new URL(decodeURIComponent(url.pathname.toString().match(/^\/v1\/[\da-f]{64}\/(.+)$/)[1])),
+    },
+    {
+        name: 'WordPress link (Simple URLs)',
+        match: url => /^\/go\/[\da-zA-Z\-]+\/?$/.test(url.pathname) && !url.pathname.startsWith('/go/aHR0cHM6') && !url.pathname.startsWith('/go/aHR0cDov'),
+        clean: cleanFactory.getRedirect,
+    },
+    {
+        name: 'WordPress link (go/go.php url)',
+        match: url => url.pathname === '/go/' || url.pathname === '/go.php',
+        clean: cleanFactory.urlDecodeSearchParam('url'),
+    },
+    {
+        name: 'WordPress link (go/goto base64)',
+        match: url => /^\/go(?:to)?\/(aHR0c(?:HM6|Dov)[\da-zA-Z\-_]+=*)$/.test(url.pathname),
+        clean: url => new URL(atob(url.pathname.match(/^\/go(?:to)?\/(aHR0c(?:HM6|Dov)[\da-zA-Z\-_]+=*)$/)[1].replace(/-/g, '+').replace(/_/g, '/'))),
     },
 ];
