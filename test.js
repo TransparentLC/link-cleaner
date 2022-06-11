@@ -39,6 +39,7 @@ for (const testcase of [
     'https://p3terx.com/go/aHR0cHM6Ly93d3cudnVsdHIuY29tLz9yZWY9NzEzMzE2OQ',
     'https://zouaw.com/go/tencent',
     'https://wpjam.com/go/aliyun/',
+    'https://v2ex.com/go/js',
 ]) {
     try {
         console.log(`\x1b[36mTest case:\x1b[0m ${testcase}`);

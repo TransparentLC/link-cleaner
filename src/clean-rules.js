@@ -277,7 +277,7 @@ export default [
     },
     {
         name: 'WordPress link (Simple URLs)',
-        match: url => /^\/go\/[\da-zA-Z\-]+\/?$/.test(url.pathname) && !url.pathname.startsWith('/go/aHR0cHM6') && !url.pathname.startsWith('/go/aHR0cDov'),
+        match: url => /^\/go\/[\da-zA-Z\-]+\/?$/.test(url.pathname) && !/^\/go\/aHR0c(?:HM6|Dov)/.test(url.pathname) && !/(?:www\.)?v2ex\.com/.test(url.hostname),
         clean: cleanFactory.getRedirect,
     },
     {
