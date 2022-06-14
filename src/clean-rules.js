@@ -134,6 +134,20 @@ export default [
         clean: cleanFactory.whitelist(new Set(['wd', 'pn'])),
     },
     {
+        name: 'Baidu search result link',
+        match: matchFactory.chain(
+            matchFactory.hostpath('www.baidu.com', '/link'),
+            matchFactory.hasSearchParam('url'),
+        ),
+        clean: cleanFactory.chain(
+            url => {
+                url.searchParams.set('wd', '');
+                url.searchParams.set('eqid', '');
+            },
+            cleanFactory.getRedirectFromBody(s => s.match(/URL='(.+?)'/)[1]),
+        ),
+    },
+    {
         name: 'Weibo short link',
         match: matchFactory.hostpath('weibo.cn', '/sinaurl'),
         clean: cleanFactory.urlDecodeSearchParam('u'),
