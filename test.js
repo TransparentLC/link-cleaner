@@ -41,6 +41,8 @@ for (const testcase of [
     'https://wpjam.com/go/aliyun/',
     'https://v2ex.com/go/js',
     'https://www.baidu.com/link?url=fpYJSbnDhK867l5Ctb6jjOb4BH_KqCETFri8JnJFdAoUyCFfDGIvLRvPu7h8mW4u&wd=&eqid=ec2b1e6e000023dd0000000662a802c4',
+    'https://u.jd.com/cwhrQ84',
+    'https://u.jd.com/cMZhON0',
 ]) {
     try {
         console.log(`\x1b[36mTest case:\x1b[0m ${testcase}`);

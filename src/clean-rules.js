@@ -131,7 +131,7 @@ export default [
     {
         name: 'Baidu search link',
         match: matchFactory.hostpath('www.baidu.com', '/s'),
-        clean: cleanFactory.whitelist(new Set(['wd', 'pn'])),
+        clean: cleanFactory.whitelist(new Set(['wd', 'pn', 'nojc'])),
     },
     {
         name: 'Baidu search result link',
@@ -169,7 +169,10 @@ export default [
     {
         name: 'b23.tv short link',
         match: matchFactory.hostpath('b23.tv', null),
-        clean: cleanFactory.getRedirect,
+        clean: cleanFactory.chain(
+            cleanFactory.getRedirect,
+            cleanFactory.blacklist(new Set(['timestamp'])),
+        ),
     },
     {
         name: 'Bilibili video',
@@ -193,6 +196,16 @@ export default [
         name: 'Weixin article',
         match: matchFactory.hostpath('mp.weixin.qq.com', '/s'),
         clean: cleanFactory.whitelist(new Set(['__biz', 'mid', 'idx', 'sn'])),
+    },
+    {
+        name: 'JD afford',
+        match: matchFactory.hostpathRegex('u.jd.com', /^\/[\dA-Za-z]{7}$/),
+        clean: cleanFactory.chain(
+            cleanFactory.getRedirectFromBody(s => s.match(/var hrl='(.+?)'/)[1]),
+            cleanFactory.blacklist(new Set(['refer', 'a', 'd', 'e'])),
+            cleanFactory.getRedirect,
+            cleanFactory.blacklist(new Set(['cu'])),
+        ),
     },
     {
         name: 'Aliyun afford',
