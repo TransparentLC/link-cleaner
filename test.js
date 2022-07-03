@@ -37,6 +37,7 @@ for (const testcase of [
     'https://zhangge.net/goto/aHR0cHM6Ly9hcGlzaXguYXBhY2hlLm9yZy9kb2NzL2FwaXNpeC9wbHVnaW5zL3Jlc3BvbnNlLXJld3JpdGU=',
     'https://zhangge.net/go/?url=https://example.com',
     'https://p3terx.com/go/aHR0cHM6Ly93d3cudnVsdHIuY29tLz9yZWY9NzEzMzE2OQ',
+    'https://blog.zeruns.tech/index.php/go/aHR0cHM6Ly9jbi5ncmF2YXRhci5jb20vYXZhdGFyLw==',
     'https://zouaw.com/go/tencent',
     'https://wpjam.com/go/aliyun/',
     'https://v2ex.com/go/js',
