@@ -24,6 +24,7 @@ export default [
             'share_tag',
             'track_id',
             'unique_k',
+            'um_tc',
             'utm_source',
             'utm_medium',
             'utm_campaign',
@@ -42,6 +43,7 @@ export default [
             'share_tag',
             'track_id',
             'unique_k',
+            'um_tc',
             'utm_source',
             'utm_medium',
             'utm_campaign',
@@ -167,6 +169,14 @@ export default [
             cleanFactory.getRedirect,
             cleanFactory.whitelist(new Set),
         ),
+    },
+    {
+        name: 'Zhihu short link alt',
+        match: matchFactory.hostpath('zhi.hu', null),
+        clean: url => {
+            url.host = 's.zhihu.com';
+            return url;
+        },
     },
     {
         name: 'b23.tv short link',

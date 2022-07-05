@@ -15,6 +15,7 @@ for (const testcase of [
     'https://weibo.cn/sinaurl?u=https%3A%2F%2Fwww.bilibili.com%2Fvideo%2FBV1f5411978t%3Fp%3D1%26share_medium%3Diphone%26share_plat%3Dios%26share_session_id%3D676A1B0A-CA50-4DAD-B1DF-9BCB569560B2%26share_source%3DSINA%26share_tag%3Ds_i%26timestamp%3D1652785055%26unique_k%3DaehUD2u',
     'https://c.pc.qq.com/middlem.html?pfurl=https://example.com',
     'http://s.zhihu.com/DawiA',
+    'http://zhi.hu/BDXoI',
     'https://curl.qcloud.com/mlSxeotg',
     'https://www.vultr.com/?ref=6809598',
     'https://www.linode.com/?r=6226223ca39970b7ee1b06b3c79015a9b80aef88',
