@@ -329,4 +329,9 @@ export default [
         match: url => /^\/(?:index\.php\/)?go(?:to)?\/(aHR0c(?:HM6|Dov)[\da-zA-Z\-_]+=*)$/.test(url.pathname),
         clean: url => new URL(atob(url.pathname.match(/^\/(?:index\.php\/)?go(?:to)?\/(aHR0c(?:HM6|Dov)[\da-zA-Z\-_]+=*)$/)[1].replace(/-/g, '+').replace(/_/g, '/'))),
     },
+    {
+        name: 'Tieba post',
+        match: matchFactory.hostpathRegex('tieba.baidu.com', /^\/p\/\d+$/),
+        clean: cleanFactory.whitelist(new Set(['pn', 'see_lz', 'pid', 'cid'])),
+    },
 ];

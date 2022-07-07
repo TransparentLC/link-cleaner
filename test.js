@@ -45,6 +45,7 @@ for (const testcase of [
     'https://www.baidu.com/link?url=fpYJSbnDhK867l5Ctb6jjOb4BH_KqCETFri8JnJFdAoUyCFfDGIvLRvPu7h8mW4u&wd=&eqid=ec2b1e6e000023dd0000000662a802c4',
     'https://u.jd.com/cwhrQ84',
     'https://u.jd.com/cMZhON0',
+    'http://tieba.baidu.com/p/3800199796?share=9105&fr=sharewise&see_lz=0&share_from=post&sfc=copy&client_type=2&client_version=12.24.0.1&st=1657158837&is_video=false&unique=712AAD1A2D03D4C8B53BD8CFAE19ECA7',
 ]) {
     try {
         console.log(`\x1b[36mTest case:\x1b[0m ${testcase}`);
