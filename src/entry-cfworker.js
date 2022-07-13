@@ -1,13 +1,13 @@
 import cleanLink from './link-cleaner.js';
+import index from './index-cfworker.min.html';
 
 addEventListener('fetch', e => e.respondWith(
     (async (/** @type {Request} */ request) => {
         const requestURL = new URL(request.url);
         if (!requestURL.searchParams.has('url')) {
-            const endpoint = `${requestURL.protocol}//${requestURL.host}${requestURL.pathname}`;
-            return new Response(`Usage:\n  Without title:\n    ${endpoint}?url=...\n  With title:\n    ${endpoint}?title&url=...`, {
+            return new Response(index, {
                 headers: {
-                    'Content-Type': 'text/plain; charset=utf-8',
+                    'Content-Type': 'text/html; charset=utf-8',
                 },
             });
         }
@@ -19,9 +19,10 @@ addEventListener('fetch', e => e.respondWith(
             if (requestURL.searchParams.has('title')) {
                 const body = await fetch(cleanedURL).then(r => r.text());
                 try {
-                    responseText = body.match(/<title(?: .+?)>(.+?)<\/title>/)[1].trim() + '\n' + cleanedURL;
+                    responseText = body.match(/<title(?: .+?)?>(.+?)<\/title>/)[1].trim() + '\n' + cleanedURL;
                 } catch (err) {
                     console.log(err);
+                    responseText = '[Failed to extract title]\n' + cleanedURL;
                 }
             } else {
                 responseText = cleanedURL;

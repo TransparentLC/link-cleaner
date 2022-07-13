@@ -9,4 +9,7 @@ esbuild.buildSync({
     define: {
         'globalThis.ENV': '"cfworker"',
     },
+    loader: {
+        '.html': 'text',
+    },
 });
