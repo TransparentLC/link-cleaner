@@ -195,6 +195,16 @@ export default [
         ),
     },
     {
+        name: 'Douyin link',
+        match: matchFactory.hostpath('www.douyin.com', null),
+        clean: cleanFactory.blacklist(new Set([
+            'enter_from',
+            'enter_method',
+            'extra_params',
+            'source',
+        ])),
+    },
+    {
         name: 'QQ middlem',
         match: matchFactory.hostpath('c.pc.qq.com', '/middlem.html'),
         clean: cleanFactory.urlDecodeSearchParam('pfurl')
