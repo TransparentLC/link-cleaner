@@ -90,8 +90,8 @@ export default [
         clean: cleanFactory.getRedirectFromBody(s => s.match(/<p class="link">(.+?)<\/p>/)[1]),
     },
     {
-        name: 'afdian link',
-        match: matchFactory.hostpath('afdian.net', '/link'),
+        name: 'Afdian/Gitee link',
+        match: matchFactory.hostpath(new Set(['afdian.net', 'gitee.com']), '/link'),
         clean: cleanFactory.urlDecodeSearchParam('target'),
     },
     {
