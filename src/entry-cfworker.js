@@ -19,7 +19,20 @@ addEventListener('fetch', e => e.respondWith(
             if (requestURL.searchParams.has('title')) {
                 const body = await fetch(cleanedURL).then(r => r.text());
                 try {
-                    responseText = body.match(/<title(?: .+?)?>(.+?)<\/title>/)[1].trim() + '\n' + cleanedURL;
+                    responseText = body.match(/<title(?: .+?)?>(.+?)<\/title>/)[1].trim()
+                    for (const [entity, decoded] of [
+                        ['&#96;', '`'],
+                        ['&#39;', '\''],
+                        ['&amp;', '&'],
+                        ['&gt;', '>'],
+                        ['&lt;', '<'],
+                        ['&nbsp;', ' '],
+                        ['&quot;', '"'],
+                        ['&yen;', '¥'],
+                    ]) {
+                        responseText = responseText.replaceAll(entity, decoded);
+                    }
+                    responseText += '\n' + cleanedURL;
                 } catch (err) {
                     console.log(err);
                     responseText = '[Failed to extract title]\n' + cleanedURL;

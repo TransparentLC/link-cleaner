@@ -17,6 +17,7 @@ export default [
         name: 'Remove utm',
         match: matchFactory.hasSearchParam(new Set([
             'spm',
+            'spm_id_from',
             'share_medium',
             'share_plat',
             'share_session_id',
@@ -36,6 +37,7 @@ export default [
         ])),
         clean: cleanFactory.blacklist(new Set([
             'spm',
+            'spm_id_from',
             'share_medium',
             'share_plat',
             'share_session_id',
