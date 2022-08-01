@@ -209,7 +209,12 @@ export default [
     {
         name: 'QQ middlem',
         match: matchFactory.hostpath('c.pc.qq.com', '/middlem.html'),
-        clean: cleanFactory.urlDecodeSearchParam('pfurl')
+        clean: cleanFactory.urlDecodeSearchParam('pfurl'),
+    },
+    {
+        name: 'Qzone link (urlshare)',
+        match: matchFactory.hostpath('www.urlshare.cn', '/umirror_url_check'),
+        clean: cleanFactory.urlDecodeSearchParam('url'),
     },
     {
         name: 'weixin110',
