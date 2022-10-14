@@ -351,4 +351,9 @@ export default [
         match: matchFactory.hostpathRegex('tieba.baidu.com', /^\/p\/\d+$/),
         clean: cleanFactory.whitelist(new Set(['pn', 'see_lz', 'pid', 'cid'])),
     },
+    {
+        name: 'BestXTools',
+        match: matchFactory.hostpath('links.bestxtools.com'),
+        clean: url => url.pathname === '/' ? url : new URL(`https:/${url.pathname}${url.search}`),
+    },
 ];
