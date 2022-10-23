@@ -347,6 +347,14 @@ export default [
         clean: url => new URL(atob(url.pathname.match(/^\/(?:index\.php\/)?go(?:to)?\/(aHR0c(?:HM6|Dov)[\da-zA-Z\-_]+=*)$/)[1].replace(/-/g, '+').replace(/_/g, '/'))),
     },
     {
+        name: 'WordPress link (golink base64)',
+        match: matchFactory.chain(
+            matchFactory.hostpath(null, '/'),
+            matchFactory.hasSearchParam('golink'),
+        ),
+        clean: url => new URL(atob(url.searchParams.get('golink'))),
+    },
+    {
         name: 'Tieba post',
         match: matchFactory.hostpathRegex('tieba.baidu.com', /^\/p\/\d+$/),
         clean: cleanFactory.whitelist(new Set(['pn', 'see_lz', 'pid', 'cid'])),
