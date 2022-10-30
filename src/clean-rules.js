@@ -364,4 +364,12 @@ export default [
         match: matchFactory.hostpath('links.bestxtools.com'),
         clean: url => url.pathname === '/' ? url : new URL(`https:/${url.pathname}${url.search}`),
     },
+    {
+        name: 'Coolapk',
+        match: matchFactory.chain(
+            matchFactory.hostpath('www.coolapk.com', '/link'),
+            matchFactory.hasSearchParam('url'),
+        ),
+        clean: cleanFactory.urlDecodeSearchParam('url'),
+    },
 ];
