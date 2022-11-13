@@ -372,4 +372,17 @@ export default [
         ),
         clean: cleanFactory.urlDecodeSearchParam('url'),
     },
+    {
+        name: 'Xiaohongshu',
+        match: matchFactory.hostpathRegex('www.xiaohongshu.com', /^\/discovery\/item\/[\da-f]+$/),
+        clean: cleanFactory.blacklist(new Set([
+            'app_platform',
+            'app_version',
+            'share_from_user_hidden',
+            'type',
+            'xhsshare',
+            'appuid',
+            'apptime',
+        ])),
+    },
 ];
