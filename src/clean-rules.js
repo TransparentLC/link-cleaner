@@ -99,7 +99,7 @@ export default [
     {
         name: 'QQ mail link',
         match: matchFactory.chain(
-            matchFactory.hostpath('mail.qq.com', '/cgi-bin/readtemplate'),
+            matchFactory.hostpath(new Set(['mail.qq.com', 'exmail.qq.com']), '/cgi-bin/readtemplate'),
             url => url.searchParams.get('t') === 'safety',
         ),
         clean: cleanFactory.urlDecodeSearchParam('gourl'),
