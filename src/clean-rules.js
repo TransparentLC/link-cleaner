@@ -207,6 +207,11 @@ export default [
         ])),
     },
     {
+        name: 'Mafengwo link',
+        match: matchFactory.hostpath('m.mafengwo.cn', '/nb/link/jumper'),
+        clean: cleanFactory.urlDecodeSearchParam('url'),
+    },
+    {
         name: 'QQ middlem',
         match: matchFactory.hostpath('c.pc.qq.com', '/middlem.html'),
         clean: cleanFactory.urlDecodeSearchParam('pfurl'),
