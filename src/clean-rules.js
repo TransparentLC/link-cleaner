@@ -355,6 +355,14 @@ export default [
         clean: url => new URL(atob(url.searchParams.get('golink'))),
     },
     {
+        name: 'Xiuno link (gowild.htm)',
+        match: matchFactory.chain(
+            matchFactory.hostpath(null, '/gowild.htm'),
+            matchFactory.hasSearchParam('url'),
+        ),
+        clean: url => new URL(url.searchParams.get('url').replace(/_([a-f\d]{2})/gi, (_, m) => String.fromCharCode(parseInt(m, 16)))),
+    },
+    {
         name: 'Tieba post',
         match: matchFactory.hostpathRegex('tieba.baidu.com', /^\/p\/\d+$/),
         clean: cleanFactory.whitelist(new Set(['pn', 'see_lz', 'pid', 'cid'])),

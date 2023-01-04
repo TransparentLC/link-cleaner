@@ -46,6 +46,7 @@ for (const testcase of [
     'https://u.jd.com/cwhrQ84',
     'https://u.jd.com/cMZhON0',
     'http://tieba.baidu.com/p/3800199796?share=9105&fr=sharewise&see_lz=0&share_from=post&sfc=copy&client_type=2&client_version=12.24.0.1&st=1657158837&is_video=false&unique=712AAD1A2D03D4C8B53BD8CFAE19ECA7',
+    'https://bbs.1ove.club/gowild.htm?url=https_3A_2F_2Fwww_2ealiyundrive_2ecom_2Fs_2FSsDm36JPK1G&u=114514&fr=https_3A_2F_2Fbbs_2e1ove_2eclub_2Fthread_2d28871_2ehtm',
 ]) {
     try {
         console.log(`\x1b[36mTest case:\x1b[0m ${testcase}`);

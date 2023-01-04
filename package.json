@@ -8,7 +8,7 @@
     "dev-cfworker": "miniflare --watch --debug --build-command \"npm run build-cfworker\" --build-watch-path src dist/link-cleaner.cfworker.js"
   },
   "devDependencies": {
-    "esbuild": "^0.16.12",
+    "esbuild": "^0.16.13",
     "miniflare": "^2.11.0",
     "npm-run-all": "^4.1.5"
   }
