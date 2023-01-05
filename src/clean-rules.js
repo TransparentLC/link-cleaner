@@ -342,9 +342,15 @@ export default [
         clean: cleanFactory.getRedirect,
     },
     {
-        name: 'WordPress link (go/go.php url)',
+        name: 'WordPress link (go/go.php url/base64)',
         match: url => url.pathname === '/go/' || url.pathname === '/go.php',
-        clean: cleanFactory.urlDecodeSearchParam('url'),
+        clean: url => {
+            try {
+                return cleanFactory.base64DecodeSearchParam('url')(url);
+            } catch {
+                return cleanFactory.urlDecodeSearchParam('url')(url);
+            }
+        },
     },
     {
         name: 'WordPress link (go/goto base64)',

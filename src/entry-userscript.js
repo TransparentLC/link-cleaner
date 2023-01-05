@@ -5,7 +5,7 @@ import cleanLink from './link-cleaner.js';
  */
 const cleanLinkForDOM = e => e.href && cleanLink(e.href)
     .then(t => (e.href !== t.toString()) && (e.href = t.toString()))
-    .catch(err => console.warn('Failed to clean:', url.toString(), err) || (url instanceof URL ? url : new URL(url)));
+    .catch(err => console.warn('Failed to clean:', e.href, err));
 
 setTimeout(() => [
     ...document.querySelectorAll('[data-spm]'),
