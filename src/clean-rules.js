@@ -207,6 +207,11 @@ export default [
         ])),
     },
     {
+        name: 'Douban link',
+        match: matchFactory.hostpath('www.douban.com', '/link2/'),
+        clean: cleanFactory.urlDecodeSearchParam('url'),
+    },
+    {
         name: 'Mafengwo link',
         match: matchFactory.hostpath('m.mafengwo.cn', '/nb/link/jumper'),
         clean: cleanFactory.urlDecodeSearchParam('url'),
