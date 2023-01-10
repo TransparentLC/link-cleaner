@@ -5,7 +5,7 @@ esbuild.buildSync({
     outfile: 'dist/link-cleaner.user.js',
     charset: 'utf8',
     bundle: true,
-    minifySyntax: true,
+    minify: true,
     define: {
         'globalThis.ENV': '"userscript"',
     },
@@ -23,7 +23,6 @@ esbuild.buildSync({
             // @grant       GM_registerMenuCommand
             // @grant       GM_setClipboard
             // @grant       GM_xmlhttpRequest
-            // @require     https://fastly.jsdelivr.net/gh/mitchellmebane/GM_fetch/GM_fetch.min.js
             // ==/UserScript==
             /* eslint-disable */
         `.trim().split('\n').map(e => e.trim()).join('\n'),

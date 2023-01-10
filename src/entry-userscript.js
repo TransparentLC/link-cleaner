@@ -1,3 +1,4 @@
+import './GM_fetch.js';
 import cleanLink from './link-cleaner.js';
 
 /**
