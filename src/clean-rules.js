@@ -397,6 +397,11 @@ export default [
         clean: cleanFactory.urlDecodeSearchParam('url'),
     },
     {
+        name: 'RSSing',
+        match: matchFactory.hostpath('www.rssing.com', '/transit.php'),
+        clean: cleanFactory.urlDecodeSearchParam('url'),
+    },
+    {
         name: 'Xiaohongshu',
         match: matchFactory.hostpathRegex('www.xiaohongshu.com', /^\/discovery\/item\/[\da-f]+$/),
         clean: cleanFactory.blacklist(new Set([
