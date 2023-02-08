@@ -78,7 +78,7 @@ export default [
     },
     {
         name: 'LD246 link',
-        match: matchFactory.hostpath('link.ld246.com', '/forward'),
+        match: matchFactory.hostpath('ld246.com', '/forward'),
         clean: cleanFactory.urlDecodeSearchParam('goto'),
     },
     {
