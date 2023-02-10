@@ -6,7 +6,7 @@ for (const testcase of [
     'https://www.zhihu.com/search?q=pd2.0&search_source=Entity&hybrid_search_source=Entity&hybrid_search_extra=%7B%22sourceType%22%3A%22answer%22%2C%22sourceId%22%3A2485554266%7D',
     'https://link.zhihu.com/?target=https%3A//rust-lang.github.io/mdBook/',
     'https://www.baidu.com/s?tn=monline_7_dg&wd=%E4%B8%8A%E6%B5%B7%E5%85%A8%E5%B8%82%E7%A4%BE%E4%BC%9A%E9%9D%A2%E6%B8%85%E9%9B%B6&usm=2&ie=utf-8&rsv_pq=ef4e7eef0003f247&oq=%E4%B8%8A%E6%B5%B7%E5%85%A8%E5%B8%82%E7%A4%BE%E4%BC%9A%E9%9D%A2%E6%B8%85%E9%9B%B6&rsv_t=ecdeuCil9AREMuRn3ZsOG9LOb%2FyokzL7QyBu2rYtquhxRweb%2Fy824ZZH7xPF%2FtBgKQcf&rqid=ef4e7eef0003f247&rsf=eb63b4d0f9f94b728c87d7f08d6dfcae_1_15_2&rsv_dl=0_right_fyb_pchot_20811&sa=0_right_fyb_pchot_20811',
-    'https://link.ld246.com/forward?goto=https%3A%2F%2Fzh.wikipedia.org%2Fwiki%2F%25E8%258E%25AB%25E6%25AF%2594%25E4%25B9%258C%25E6%2596%25AF%25E5%25B8%25A6',
+    'https://ld246.com/forward?goto=https%3A%2F%2Fzh.wikipedia.org%2Fwiki%2F%25E8%258E%25AB%25E6%25AF%2594%25E4%25B9%258C%25E6%2596%25AF%25E5%25B8%25A6',
     'https://www.youtube.com/redirect?event=video_description&redir_token=QUFFLUhqa0luZWlKTDJxV0g3S3U5Mktpa1VOTmtnZ3VzQXxBQ3Jtc0ttVDNES2JKY0RUdkk4NVNjdlNhS04xYy10VUNXVnhnOTBhRnRLQXdJV3FkRHZ3aXRSQ291U013M05HR0dUeFd1eHRXNG1GRTlweUExbVAzYk9hTzhFcU81emlNcG1Kc2p4RGsweVZwUFZvQ2l6NXE3RQ&q=https%3A%2F%2Ftwitter.com%2FPEPPER_777&v=xyD0BQxh2ms',
     'https://link.segmentfault.com/?enc=Rbh8pMHUW0OMVw4Qy4zzhA%3D%3D.v3sI89Q8ZV94G4pZn0OPLolA2ILUp%2FKGzzdQZ%2BGN2L8%3D',
     'https://b23.tv/f6uaCgy',
@@ -47,6 +47,7 @@ for (const testcase of [
     'https://u.jd.com/cMZhON0',
     'http://tieba.baidu.com/p/3800199796?share=9105&fr=sharewise&see_lz=0&share_from=post&sfc=copy&client_type=2&client_version=12.24.0.1&st=1657158837&is_video=false&unique=712AAD1A2D03D4C8B53BD8CFAE19ECA7',
     'https://bbs.1ove.club/gowild.htm?url=https_3A_2F_2Fwww_2ealiyundrive_2ecom_2Fs_2FSsDm36JPK1G&u=114514&fr=https_3A_2F_2Fbbs_2e1ove_2eclub_2Fthread_2d28871_2ehtm',
+    'https://go.smzdm.com/b3ebe5a7067eb9af/ab_cd_ef_012_34567890_12345_6789_0123_4',
 ]) {
     try {
         console.log(`\x1b[36mTest case:\x1b[0m ${testcase}`);

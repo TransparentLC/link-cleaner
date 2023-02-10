@@ -237,6 +237,26 @@ export default [
         clean: cleanFactory.whitelist(new Set(['__biz', 'mid', 'idx', 'sn'])),
     },
     {
+        name: 'SMZDM afford',
+        match: matchFactory.hostpathRegex('go.smzdm.com', /^\/[\da-f]{16}\/.+?$/),
+        clean: cleanFactory.chain(
+            cleanFactory.getRedirectFromBody(s => {
+                const match = s.match(/^\s*eval\(function\(p,a,c,k,e,[dr]\){.+?}\('(.*)',\d+,\d+,'(.*)'\.split\('\|'\),0,{}\)\)\s*$/m);
+                const dict = Object.fromEntries(match[2].split('|').map((e, i) => {
+                    let c = '';
+                    while (i) {
+                        const m = i % 62;
+                        c = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'[m] + c;
+                        i = (i - m) / 62;
+                    }
+                    return [c || '0', e];
+                }));
+                return match[1].replaceAll('\\', '').replace(/\b\w+\b/g, m => dict[m] || m).match(/smzdmhref='(.*?)'/)[1];
+            }),
+            cleanFactory.urlDecodeSearchParam('to'),
+        ),
+    },
+    {
         name: 'JD afford',
         match: matchFactory.hostpathRegex('u.jd.com', /^\/[\dA-Za-z]{7}$/),
         clean: cleanFactory.chain(
