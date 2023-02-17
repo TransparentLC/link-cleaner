@@ -16,6 +16,7 @@ export default [
     {
         name: 'Remove utm',
         match: matchFactory.hasSearchParam(new Set([
+            'mkt_tok',
             'spm',
             'spm_id_from',
             'share_medium',
@@ -36,6 +37,7 @@ export default [
             'vd_source',
         ])),
         clean: cleanFactory.blacklist(new Set([
+            'mkt_tok',
             'spm',
             'spm_id_from',
             'share_medium',
@@ -132,7 +134,7 @@ export default [
     {
         name: 'Zhihu search link',
         match: matchFactory.hostpath('www.zhihu.com', '/search'),
-        clean: cleanFactory.whitelist(new Set(['q', 'type'])),
+        clean: cleanFactory.whitelist(new Set(['q', 'type', 'correction'])),
     },
     {
         name: 'Baidu search link',
@@ -433,5 +435,29 @@ export default [
             'appuid',
             'apptime',
         ])),
+    },
+    {
+        name: 'Vultr email link',
+        match: matchFactory.hostpathRegex('experience.getvultr.com', /^\/[\dA-Za-z-_]+=*$/),
+        clean: cleanFactory.chain(
+            cleanFactory.getRedirectFromBody(s => s.match(/^\s*var redirecturl = '(.+?)';\s*$/m)[1]),
+            cleanFactory.useHttps,
+        ),
+    },
+    {
+        name: 'Cloudflare email link',
+        match: matchFactory.hostpathRegex('content.cloudflare.com', /^\/[\dA-Za-z-_]+=*$/),
+        clean: cleanFactory.chain(
+            cleanFactory.getRedirectFromBody(s => s.match(/^\s*var redirecturl = '(.+?)';\s*$/m)[1]),
+            cleanFactory.useHttps,
+        ),
+    },
+    {
+        name: 'Cloudflare email link',
+        match: matchFactory.hostpath('data.em2.cloudflare.com', '/ee/v1/click'),
+        clean: cleanFactory.chain(
+            cleanFactory.getRedirect,
+            cleanFactory.blacklist(new Set(['correlationId'])),
+        ),
     },
 ];
