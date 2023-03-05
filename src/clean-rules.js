@@ -64,6 +64,11 @@ export default [
         clean: cleanFactory.urlDecodeSearchParam('target'),
     },
     {
+        name: 'KDocs link',
+        match: matchFactory.hostpath('www.kdocs.cn', '/office/link'),
+        clean: cleanFactory.urlDecodeSearchParam('target'),
+    },
+    {
         name: 'Jianshu link',
         match: matchFactory.hostpath('link.jianshu.com', '/'),
         clean: cleanFactory.urlDecodeSearchParam('t'),
