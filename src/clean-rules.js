@@ -59,8 +59,8 @@ export default [
         ])),
     },
     {
-        name: 'Zhihu/Juejin link',
-        match: matchFactory.hostpath(new Set(['link.zhihu.com', 'link.juejin.cn']), '/'),
+        name: 'Zhihu/Juejin/CSDN link',
+        match: matchFactory.hostpath(new Set(['link.zhihu.com', 'link.juejin.cn', 'link.csdn.net']), '/'),
         clean: cleanFactory.urlDecodeSearchParam('target'),
     },
     {
