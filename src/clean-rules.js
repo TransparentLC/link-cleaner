@@ -69,6 +69,11 @@ export default [
         clean: cleanFactory.urlDecodeSearchParam('target'),
     },
     {
+        name: 'sspai link',
+        match: matchFactory.hostpath('sspai.com', '/link'),
+        clean: cleanFactory.urlDecodeSearchParam('target'),
+    },
+    {
         name: 'Jianshu link',
         match: matchFactory.hostpath('link.jianshu.com', '/'),
         clean: cleanFactory.urlDecodeSearchParam('t'),
