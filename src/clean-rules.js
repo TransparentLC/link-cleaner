@@ -149,7 +149,7 @@ export default [
     {
         name: 'Baidu search link',
         match: matchFactory.hostpath('www.baidu.com', '/s'),
-        clean: cleanFactory.whitelist(new Set(['wd', 'pn', 'nojc'])),
+        clean: cleanFactory.whitelist(new Set(['wd', 'pn', 'nojc', 'gpc', 'si'])),
     },
     {
         name: 'Baidu search result link',
