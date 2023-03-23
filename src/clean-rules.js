@@ -488,4 +488,12 @@ export default [
         ),
         clean: cleanFactory.whitelist(new Set(['id'])),
     },
+    {
+        name: 'NGA posts',
+        match: matchFactory.chain(
+            matchFactory.hostpath(new Set(['bbs.nga.cn', 'nga.178.com', 'ngabbs.com']), '/read.php'),
+            matchFactory.hasSearchParam('tid'),
+        ),
+        clean: cleanFactory.whitelist(new Set(['tid', 'page'])),
+    },
 ];
