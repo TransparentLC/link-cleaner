@@ -1,5 +1,13 @@
 {
+  "name": "link-cleaner",
+  "author": "TransparentLC",
+  "repository": "github:TransparentLC/link-cleaner",
+  "license": "AGPL-3.0-or-later",
   "type": "module",
+  "main": "src/link-cleaner.js",
+  "engines": {
+    "node": ">=17.5.0"
+  },
   "scripts": {
     "test": "node test.js",
     "build": "run-p build-cfworker build-userscript",
