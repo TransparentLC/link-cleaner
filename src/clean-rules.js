@@ -435,7 +435,7 @@ export default [
     },
     {
         name: 'Xiaohongshu',
-        match: matchFactory.hostpathRegex('www.xiaohongshu.com', /^\/discovery\/item\/[\da-f]+$/),
+        match: matchFactory.hostpathRegex('www.xiaohongshu.com', /^\/(?:discovery\/item|explore)\/[\da-f]+$/),
         clean: cleanFactory.blacklist(new Set([
             'app_platform',
             'app_version',
@@ -469,5 +469,23 @@ export default [
             cleanFactory.getRedirect,
             cleanFactory.blacklist(new Set(['correlationId'])),
         ),
+    },
+    {
+        name: 'Weibo mobile status',
+        match: matchFactory.hostpathRegex('m.weibo.cn', /^\/status\/\d+$/),
+        clean: cleanFactory.whitelist(new Set),
+    },
+    {
+        name: 'Dianping',
+        match: matchFactory.hostpathRegex('m.dianping.com', /^\/shopshare\/[\dA-Za-z]+$/),
+        clean: cleanFactory.whitelist(new Set),
+    },
+    {
+        name: 'Cloudmusic',
+        match: matchFactory.chain(
+            matchFactory.hostpath(new Set(['music.163.com', 'y.music.163.com']), new Set(['/song', '/m/song'])),
+            matchFactory.hasSearchParam('id'),
+        ),
+        clean: cleanFactory.whitelist(new Set(['id'])),
     },
 ];
