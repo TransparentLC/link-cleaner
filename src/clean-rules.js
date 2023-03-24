@@ -496,4 +496,12 @@ export default [
         ),
         clean: cleanFactory.whitelist(new Set(['tid', 'page'])),
     },
+    {
+        name: 'XQuan',
+        match: matchFactory.chain(
+            matchFactory.hostpath('xquan.net', '/linkfilter'),
+            matchFactory.hasSearchParam('url'),
+        ),
+        clean: cleanFactory.urlDecodeSearchParam('url'),
+    },
 ];
