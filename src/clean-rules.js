@@ -16,9 +16,12 @@ export default [
     {
         name: 'Remove utm',
         match: matchFactory.hasSearchParam(new Set([
+            'bbid',
             'mkt_tok',
+            'plat_id',
             'spm',
             'spm_id_from',
+            'share_from',
             'share_medium',
             'share_plat',
             'share_session_id',
@@ -39,9 +42,12 @@ export default [
             'vd_source',
         ])),
         clean: cleanFactory.blacklist(new Set([
+            'bbid',
             'mkt_tok',
+            'plat_id',
             'spm',
             'spm_id_from',
+            'share_from',
             'share_medium',
             'share_plat',
             'share_session_id',
