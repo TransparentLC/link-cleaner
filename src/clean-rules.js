@@ -508,4 +508,9 @@ export default [
         ),
         clean: cleanFactory.urlDecodeSearchParam('url'),
     },
+    {
+        name: 'Pincong',
+        match: matchFactory.hostpathRegex('pincong.rocks', /^\/url\/link\/(aHR0c(?:HM6|Dov)[\da-zA-Z\-_]+=*)$/),
+        clean: url => new URL(atob(url.pathname.match(/^\/url\/link\/(aHR0c(?:HM6|Dov)[\da-zA-Z\-_]+=*)$/)[1].replace(/-/g, '+').replace(/_/g, '/'))),
+    },
 ];
