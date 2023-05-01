@@ -28,13 +28,15 @@ cleanLink(location.href).then(e => {
     // Experimental
     new MutationObserver(mutationList => {
         for (const mutation of mutationList) {
-            if (mutation.target.nodeName.toLowerCase() === 'a') {
+            if (mutation.target.nodeName === 'A') {
+                // console.log('Link Cleaner', mutation.target, mutation.oldValue, mutation.target.href);
                 cleanLinkForDOM(mutation.target);
             }
         }
     }).observe(document.body, {
         attributes: true,
         attributeFilter: ['href'],
+        // attributeOldValue: true,
         childList: true,
         subtree: true,
     });
