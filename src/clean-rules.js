@@ -76,13 +76,13 @@ export default [
         clean: cleanFactory.urlDecodeSearchParam('target'),
     },
     {
-        name: 'KDocs link',
-        match: matchFactory.hostpath('www.kdocs.cn', '/office/link'),
+        name: 'sspai/gcores link',
+        match: matchFactory.hostpath(new Set(['sspai.com', 'www.gcores.com']), '/link'),
         clean: cleanFactory.urlDecodeSearchParam('target'),
     },
     {
-        name: 'sspai link',
-        match: matchFactory.hostpath('sspai.com', '/link'),
+        name: 'KDocs link',
+        match: matchFactory.hostpath('www.kdocs.cn', '/office/link'),
         clean: cleanFactory.urlDecodeSearchParam('target'),
     },
     {
