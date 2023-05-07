@@ -410,6 +410,11 @@ export default [
         clean: url => new URL(atob(url.pathname.match(/^\/(?:index\.php\/)?go(?:to)?\/(aHR0c(?:HM6|Dov)[\da-zA-Z\-_]+=*)$/)[1].replace(/-/g, '+').replace(/_/g, '/'))),
     },
     {
+        name: 'WordPress link (cp-link-open base64)',
+        match: matchFactory.hostpath(null, '/wp-content/plugins/cp-link-open/link.php'),
+        clean: cleanFactory.base64DecodeSearchParam('a'),
+    },
+    {
         name: 'WordPress link (golink base64)',
         match: matchFactory.chain(
             matchFactory.hostpath(null, '/'),
