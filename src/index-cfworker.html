@@ -87,7 +87,11 @@
             $clean.onclick = () => {
                 if (!$text.value) return;
                 $clean.setAttribute('disabled', '');
-                fetch('https://i.akarin.dev/link-cleaner/?title&url=' + encodeURIComponent($text.value))
+                const u = new URL(location.href);
+                Array.from(u.searchParams.keys()).forEach(e => u.searchParams.delete(e));
+                u.searchParams.set('title', '');
+                u.searchParams.set('url', $text.value);
+                fetch(u)
                     .then(r => {
                         if (r.status >= 400) throw new Error(`${r.status} ${r.statusText}`);
                         return r.text();
