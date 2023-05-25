@@ -21,8 +21,6 @@ addEventListener('fetch', e => e.respondWith(
                 try {
                     responseText = body.match(/<title(?: .+?)?>(.+?)<\/title>/)[1].trim()
                     for (const [entity, decoded] of [
-                        ['&#96;', '`'],
-                        ['&#39;', '\''],
                         ['&amp;', '&'],
                         ['&gt;', '>'],
                         ['&lt;', '<'],
@@ -32,6 +30,8 @@ addEventListener('fetch', e => e.respondWith(
                     ]) {
                         responseText = responseText.replaceAll(entity, decoded);
                     }
+                    responseText = responseText.replace(/&#(\d+);/g, (_, m) => String.fromCharCode(parseInt(m)));
+                    responseText = responseText.replace(/&#x([\da-f]+);/g, (_, m) => String.fromCharCode(parseInt(m, 16)));
                     responseText += '\n' + cleanedURL;
                 } catch (err) {
                     console.log(err);
