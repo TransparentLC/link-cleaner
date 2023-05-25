@@ -58,3 +58,5 @@ GM_registerMenuCommand('手动输入链接进行清洗', async () => {
 });
 
 GM_registerMenuCommand('重新清洗网页上的所有链接', () => Array.from(document.querySelectorAll('a')).forEach(cleanLinkForDOM));
+GM_registerMenuCommand('复制标题和网址', () => GM_setClipboard(`${document.title.trim()}\n${location.href}`));
+GM_registerMenuCommand('复制标题和网址（Markdown）', () => GM_setClipboard(`![${document.title.trim()}](${location.href})`));
