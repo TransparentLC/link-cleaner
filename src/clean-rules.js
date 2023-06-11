@@ -86,9 +86,19 @@ export default [
         clean: cleanFactory.urlDecodeSearchParam('target'),
     },
     {
-        name: 'Jianshu link',
+        name: 'Jianshu link (link.jianshu.com)',
         match: matchFactory.hostpath('link.jianshu.com', '/'),
         clean: cleanFactory.urlDecodeSearchParam('t'),
+    },
+    {
+        name: 'Jianshu link (links.jianshu.com)',
+        match: matchFactory.hostpath('links.jianshu.com', '/go'),
+        clean: cleanFactory.urlDecodeSearchParam('to'),
+    },
+    {
+        name: 'Jianshu link (go-wild)',
+        match: matchFactory.hostpath('www.jianshu.com', '/go-wild'),
+        clean: cleanFactory.urlDecodeSearchParam('url'),
     },
     {
         name: 'SegmentFault link',
