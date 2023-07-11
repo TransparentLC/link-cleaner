@@ -86,6 +86,11 @@ export default [
         clean: cleanFactory.urlDecodeSearchParam('target'),
     },
     {
+        name: 'Shimo link',
+        match: matchFactory.hostpath('https://shimo.im', '/outlink/black'),
+        clean: cleanFactory.urlDecodeSearchParam('url'),
+    },
+    {
         name: 'Jianshu link (link.jianshu.com)',
         match: matchFactory.hostpath('link.jianshu.com', '/'),
         clean: cleanFactory.urlDecodeSearchParam('t'),
@@ -255,7 +260,7 @@ export default [
     },
     {
         name: 'QQ middlem',
-        match: matchFactory.hostpath('c.pc.qq.com', '/middlem.html'),
+        match: matchFactory.hostpath('c.pc.qq.com', new Set(['/middlem.html', '/middleb.html', '/index.html'])),
         clean: cleanFactory.urlDecodeSearchParam('pfurl'),
     },
     {
