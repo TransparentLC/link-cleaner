@@ -479,6 +479,7 @@ export default [
             'xhsshare',
             'appuid',
             'apptime',
+            'author_share',
         ])),
     },
     {
