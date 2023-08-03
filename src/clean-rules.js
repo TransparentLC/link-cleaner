@@ -555,4 +555,26 @@ export default [
         match: matchFactory.hostpathRegex('www.worldlink.com.cn', /^(?:\/zh_tw|\/en)?\/link$/),
         clean: cleanFactory.urlDecodeSearchParam('target'),
     },
+    {
+        name: 'sina.lt',
+        match: url => (new Set([
+            't.hk.uy',
+            'dwz.win',
+            'tb.cn.hn',
+            'jd.cn.hn',
+            'dwz.date',
+        ])).has(url.hostname) && /^\/[\da-zA-Z]+$/.test(url.pathname),
+        clean: async url => {
+            const resp = await fetch(url, {
+                redirect: 'manual',
+                credentials: globalThis.ENV === 'cfworker' ? undefined : 'omit',
+            });
+            if (resp.status === 301) {
+                return globalThis.ENV === 'userscript' ? new URL(resp.url) : (resp.headers.has('location') ? new URL(resp.headers.get('location')) : url);
+            } else {
+                const body = await resp.text();
+                return new URL(body.match(/<p class="url">(.+?)<\/p>/)[1]);
+            }
+        },
+    },
 ];
