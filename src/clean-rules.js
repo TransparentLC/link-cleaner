@@ -577,4 +577,24 @@ export default [
             }
         },
     },
+    {
+        name: 'V2Board afford',
+        match: matchFactory.chain(
+            matchFactory.hostpath(null, new Set(['/', '/index.php'])),
+            url => url.hash.match(/^#\/register\?code=[A-Za-z\d]*$/),
+        ),
+        clean: url => {
+            const u = new URL(url);
+            u.hash = '#/register';
+            return u;
+        },
+    },
+    {
+        name: 'SSPanel afford',
+        match: matchFactory.chain(
+            matchFactory.hostpath(null, '/auth/register'),
+            matchFactory.hasSearchParam(new Set(['code', 'affid'])),
+        ),
+        clean: cleanFactory.blacklist(new Set(['code', 'affid'])),
+    },
 ];
