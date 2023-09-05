@@ -81,14 +81,29 @@ export default [
         clean: cleanFactory.urlDecodeSearchParam('target'),
     },
     {
+        name: 'Leetcode link',
+        match: matchFactory.hostpath('leetcode.cn', '/link/'),
+        clean: cleanFactory.urlDecodeSearchParam('target'),
+    },
+    {
         name: 'KDocs link',
         match: matchFactory.hostpath('www.kdocs.cn', '/office/link'),
         clean: cleanFactory.urlDecodeSearchParam('target'),
     },
     {
         name: 'Shimo link',
-        match: matchFactory.hostpath('https://shimo.im', '/outlink/black'),
+        match: matchFactory.hostpath('shimo.im', '/outlink/black'),
         clean: cleanFactory.urlDecodeSearchParam('url'),
+    },
+    {
+        name: 'TianYanCha link',
+        match: matchFactory.hostpath('www.tianyancha.com', '/security'),
+        clean: cleanFactory.urlDecodeSearchParam('target'),
+    },
+    {
+        name: 'Instagram link',
+        match: matchFactory.hostpath('www.instagram.com', '/linkshim/'),
+        clean: cleanFactory.urlDecodeSearchParam('u'),
     },
     {
         name: 'Jianshu link (link.jianshu.com)',
