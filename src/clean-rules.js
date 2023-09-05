@@ -76,14 +76,39 @@ export default [
         clean: cleanFactory.urlDecodeSearchParam('target'),
     },
     {
-        name: 'sspai/gcores link',
-        match: matchFactory.hostpath(new Set(['sspai.com', 'www.gcores.com']), '/link'),
+        name: 'sspai/gcores/Afdian/Gitee link',
+        match: matchFactory.hostpath(new Set(['sspai.com', 'www.gcores.com', 'afdian.net', 'gitee.com']), '/link'),
         clean: cleanFactory.urlDecodeSearchParam('target'),
     },
     {
         name: 'Leetcode link',
         match: matchFactory.hostpath('leetcode.cn', '/link/'),
         clean: cleanFactory.urlDecodeSearchParam('target'),
+    },
+    {
+        name: 'Kook/Kaihela link',
+        match: matchFactory.hostpath(new Set(['www.kookapp.cn', 'www.kaiheila.cn']), '/go-wild.html'),
+        clean: cleanFactory.urlDecodeSearchParam('url'),
+    },
+    {
+        name: 'Curseforge link',
+        match: matchFactory.hostpath('www.curseforge.com', '/linkout'),
+        clean: url => url.searchParams.has('remoteUrl') ? new URL(decodeURIComponent(decodeURIComponent(url.searchParams.get('remoteUrl')))) : url,
+    },
+    {
+        name: 'Zaker link',
+        match: matchFactory.hostpath('iphone.myzaker.com', '/zaker/link.php'),
+        clean: cleanFactory.base64DecodeSearchParam('b'),
+    },
+    {
+        name: 'Logonews link',
+        match: matchFactory.hostpath('link.logonews.cn', '/'),
+        clean: cleanFactory.urlDecodeSearchParam('url'),
+    },
+    {
+        name: 'Pixiv link',
+        match: matchFactory.hostpath('www.pixiv.net', '/jump.php'),
+        clean: cleanFactory.urlDecodeSearchParam('url'),
     },
     {
         name: 'KDocs link',
@@ -146,11 +171,6 @@ export default [
         clean: cleanFactory.getRedirectFromBody(s => s.match(/<p class="link">(.+?)<\/p>/)[1]),
     },
     {
-        name: 'Afdian/Gitee link',
-        match: matchFactory.hostpath(new Set(['afdian.net', 'gitee.com']), '/link'),
-        clean: cleanFactory.urlDecodeSearchParam('target'),
-    },
-    {
         name: 'QQ mail link',
         match: matchFactory.chain(
             matchFactory.hostpath(new Set(['mail.qq.com', 'exmail.qq.com']), '/cgi-bin/readtemplate'),
@@ -164,13 +184,18 @@ export default [
         clean: cleanFactory.urlDecodeSearchParam('url'),
     },
     {
+        name: 'QQ support link',
+        match: matchFactory.hostpathRegex('support.qq.com', /^\/products\/\d+\/link-jump$/),
+        clean: cleanFactory.urlDecodeSearchParam('jump'),
+    },
+    {
         name: 'Youtube link',
         match: matchFactory.hostpath('www.youtube.com', '/redirect'),
         clean: cleanFactory.urlDecodeSearchParam('q'),
     },
     {
-        name: 'Steam community link',
-        match: matchFactory.hostpath('steamcommunity.com', '/linkfilter/'),
+        name: 'Steam community/Bilibili wiki link',
+        match: matchFactory.hostpath(new Set(['steamcommunity.com', 'game.bilibili.com']), '/linkfilter/'),
         clean: cleanFactory.urlDecodeSearchParam('url'),
     },
     {
@@ -181,6 +206,20 @@ export default [
     {
         name: 'Hellogithub link',
         match: matchFactory.hostpath('hellogithub.com', '/periodical/statistics/click/'),
+        clean: cleanFactory.urlDecodeSearchParam('target'),
+    },
+    {
+        name: 'Yuque link',
+        match: matchFactory.hostpath('www.yuque.com', '/r/goto'),
+        clean: cleanFactory.urlDecodeSearchParam('url'),
+    },
+    {
+        name: 'MCBBS link',
+        match: matchFactory.chain(
+            matchFactory.hostpath('www.mcbbs.net', '/plugin.php'),
+            url => url.searchParams.get('id') === 'link_redirect',
+            matchFactory.hasSearchParam('target'),
+        ),
         clean: cleanFactory.urlDecodeSearchParam('target'),
     },
     {
