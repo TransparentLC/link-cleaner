@@ -86,6 +86,11 @@ export default [
         clean: cleanFactory.urlDecodeSearchParam('target'),
     },
     {
+        name: 'Tencent cloud link',
+        match: matchFactory.hostpath('cloud.tencent.com', '/developer/tools/blog-entry'),
+        clean: cleanFactory.urlDecodeSearchParam('target'),
+    },
+    {
         name: 'Kook/Kaihela link',
         match: matchFactory.hostpath(new Set(['www.kookapp.cn', 'www.kaiheila.cn']), '/go-wild.html'),
         clean: cleanFactory.urlDecodeSearchParam('url'),
