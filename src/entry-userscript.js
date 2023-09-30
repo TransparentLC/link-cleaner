@@ -5,8 +5,12 @@ import cleanLink from './link-cleaner.js';
  * @param {HTMLAnchorElement} e
  */
 const cleanLinkForDOM = e => e.href && cleanLink(e.href)
-    .then(t => (e.href !== t.toString()) && (e.href = t.toString()))
-    .catch(err => console.warn('Failed to clean:', e.href, err));
+    .then(t => {
+        const r = t.toString()
+        if (e.href === r) return;
+        console.log('Link cleaner:', e, e.href, '->', (e.href = t.toString()));
+    })
+    .catch(err => console.warn('Link cleaner:', e, e.href, 'Failed to clean', err));
 
 setTimeout(() => [
     ...document.querySelectorAll('[data-spm]'),
