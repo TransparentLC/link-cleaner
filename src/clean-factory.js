@@ -45,6 +45,11 @@ export default {
      * @param {URL} url
      * @returns {URL}
      */
+    getSearch: url => new URL(decodeURIComponent(url.search.replace(/^\?/, ''))),
+    /**
+     * @param {URL} url
+     * @returns {URL}
+     */
     getRedirect: async url => {
         const resp = await fetch(url, {
             redirect: 'manual',

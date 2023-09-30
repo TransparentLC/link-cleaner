@@ -86,6 +86,11 @@ export default [
         clean: cleanFactory.urlDecodeSearchParam('target'),
     },
     {
+        name: 'Nowcoder link',
+        match: matchFactory.hostpath('hd.nowcoder.com', '/link.html'),
+        clean: cleanFactory.urlDecodeSearchParam('target'),
+    },
+    {
         name: 'Tencent cloud link',
         match: matchFactory.hostpath('cloud.tencent.com', '/developer/tools/blog-entry'),
         clean: cleanFactory.urlDecodeSearchParam('target'),
@@ -113,7 +118,12 @@ export default [
     {
         name: 'Pixiv link',
         match: matchFactory.hostpath('www.pixiv.net', '/jump.php'),
-        clean: cleanFactory.urlDecodeSearchParam('url'),
+        clean: cleanFactory.getSearch,
+    },
+    {
+        name: '5ch link',
+        match: matchFactory.hostpath('jump.5ch.net', '/'),
+        clean: cleanFactory.getSearch,
     },
     {
         name: 'KDocs link',
@@ -128,6 +138,31 @@ export default [
     {
         name: 'TianYanCha link',
         match: matchFactory.hostpath('www.tianyancha.com', '/security'),
+        clean: cleanFactory.urlDecodeSearchParam('target'),
+    },
+    {
+        name: 'AiQiCha link',
+        match: matchFactory.hostpath('aiqicha.baidu.com', '/safetip'),
+        clean: cleanFactory.urlDecodeSearchParam('target'),
+    },
+    {
+        name: 'QiChaCha link',
+        match: matchFactory.hostpath('www.qcc.com', '/web/transfer-link'),
+        clean: cleanFactory.urlDecodeSearchParam('link'),
+    },
+    {
+        name: 'Uisdc link',
+        match: matchFactory.hostpath('link.uisdc.com', '/'),
+        clean: cleanFactory.urlDecodeSearchParam('redirect'),
+    },
+    {
+        name: '51cto link',
+        match: matchFactory.hostpath('blog.51cto.com', '/transfer'),
+        clean: cleanFactory.getSearch,
+    },
+    {
+        name: 'Feishu link',
+        match: matchFactory.hostpath('security.feishu.cn', '/link/safety'),
         clean: cleanFactory.urlDecodeSearchParam('target'),
     },
     {
@@ -252,9 +287,9 @@ export default [
         ),
     },
     {
-        name: 'Weibo short link',
+        name: 'Weibo link',
         match: matchFactory.hostpath('weibo.cn', '/sinaurl'),
-        clean: cleanFactory.urlDecodeSearchParam('u'),
+        clean: url => cleanFactory.urlDecodeSearchParam(url.searchParams.has('u') ? 'u' : 'toasturl')(url),
     },
     {
         name: 't.cn short link',
@@ -318,9 +353,34 @@ export default [
         clean: cleanFactory.urlDecodeSearchParam('url'),
     },
     {
+        name: 'Sogou link',
+        match: matchFactory.hostpath('m.sogou.com', '/web/tc'),
+        clean: cleanFactory.urlDecodeSearchParam('url'),
+    },
+    {
+        name: 'Chinaz link',
+        match: matchFactory.hostpath('www.chinaz.com', '/go.shtml'),
+        clean: cleanFactory.urlDecodeSearchParam('url'),
+    },
+    {
+        name: 'PC6 link',
+        match: matchFactory.hostpath('www.pc6.com', '/goread.html'),
+        clean: cleanFactory.urlDecodeSearchParam('gourl'),
+    },
+    {
+        name: 'Yinxiang link',
+        match: matchFactory.hostpath('app.yinxiang.com', '/OutboundRedirect.action'),
+        clean: cleanFactory.urlDecodeSearchParam('dest'),
+    },
+    {
         name: 'QQ middlem',
         match: matchFactory.hostpath('c.pc.qq.com', new Set(['/middlem.html', '/middleb.html', '/index.html'])),
         clean: cleanFactory.urlDecodeSearchParam('pfurl'),
+    },
+    {
+        name: 'QQ middlem',
+        match: matchFactory.hostpath('c.pc.qq.com', new Set(['/pc.html', '/ios.html'])),
+        clean: cleanFactory.urlDecodeSearchParam('url'),
     },
     {
         name: 'Qzone link (urlshare)',
@@ -336,6 +396,11 @@ export default [
         name: 'Weixin article',
         match: matchFactory.hostpath('mp.weixin.qq.com', '/s'),
         clean: cleanFactory.whitelist(new Set(['__biz', 'mid', 'idx', 'sn', 'tempkey'])),
+    },
+    {
+        name: 'Weixin developers link',
+        match: matchFactory.hostpath('developers.weixin.qq.com', '/community/middlepage/href'),
+        clean: cleanFactory.urlDecodeSearchParam('href'),
     },
     {
         name: 'SMZDM afford',
