@@ -2,7 +2,7 @@
 
 网站链接清洗器。
 
-这个项目受油猴脚本 [Open the F**king URL Right Now](https://greasyfork.org/zh-CN/scripts/412612) 的启发，作用是对以下类型的超链接进行“净化”处理：
+这个项目受油猴脚本[“Open the F**king URL Right Now”](https://greasyfork.org/zh-CN/scripts/412612)和[“redirect 外链跳转”](https://greasyfork.org/zh-CN/scripts/416338)的启发，作用是对以下类型的超链接进行“净化”处理：
 
 * 阻碍用户直达目标网页的“超不链接”
     * 清洗前：`https://link.zhihu.com/?target=https%3A//example.com`
@@ -72,7 +72,8 @@ https://i.akarin.dev/link-cleaner/?title&url=https://example.com
 * `cleanFactory.urlDecodeSearchParam(p)` 将指定 URL 参数的值作为清洗结果
 * `cleanFactory.base64DecodeSearchParam(p)` 将指定 URL 参数的值进行 Base64 解码后作为清洗结果
 * `cleanFactory.blacklist(p)` 去除指定的 URL 参数
-* `cleanFactory.whitelist(p)` 除指定的 URL 参数外，去除其它所有 URL 参数
+* `cleanFactory.whitelist(p)` 去除指定的 URL 参数以外的其它所有 URL 参数
+* `cleanFactory.getSearch` 将 URL 的整个 Query String 作为清洗结果
 * `cleanFactory.getRedirect` 使用 `fetch` 向待清洗的 URL 发出请求，以重定向的 URL（`Location` 响应头）作为清洗结果
 * `cleanFactory.getRedirectFromBody(fn)` 使用 `fetch` 向待清洗的 URL 发出请求，对响应内容使用指定函数获取清洗结果
 * `cleanFactory.bv2av` 将 URL 中的 Bilibili 的 BV 号替换为 AV 号
