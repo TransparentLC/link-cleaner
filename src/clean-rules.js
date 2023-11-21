@@ -604,6 +604,7 @@ export default [
             'appuid',
             'apptime',
             'author_share',
+            'ignoreEngage',
         ])),
     },
     {
