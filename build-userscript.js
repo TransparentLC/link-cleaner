@@ -13,7 +13,7 @@ esbuild.buildSync({
         js: `
             // ==UserScript==
             // @name        Link Cleaner
-            // @version     ${Date.now()}
+            // @version     ${(new Date).toISOString()}
             // @author      TransparentLC
             // @description 清洗网页上带有各种跟踪参数的链接
             // @source      https://github.com/TransparentLC/link-cleaner
