@@ -1,4 +1,4 @@
-import cleanLink from './link-cleaner.js';
+import { cleanLink, getTitle } from './link-cleaner.js';
 import index from './index-cfworker.min.html';
 
 addEventListener('fetch', e => e.respondWith(
@@ -17,26 +17,13 @@ addEventListener('fetch', e => e.respondWith(
             const cleanedURL = await cleanLink(dirtyURL);
             let responseText;
             if (requestURL.searchParams.has('title')) {
-                const body = await fetch(cleanedURL).then(r => r.text());
                 try {
-                    responseText = body.match(/<title(?: .+?)?>(.+?)<\/title>/)[1].trim()
-                    for (const [entity, decoded] of [
-                        ['&amp;', '&'],
-                        ['&gt;', '>'],
-                        ['&lt;', '<'],
-                        ['&nbsp;', ' '],
-                        ['&quot;', '"'],
-                        ['&yen;', '¥'],
-                    ]) {
-                        responseText = responseText.replaceAll(entity, decoded);
-                    }
-                    responseText = responseText.replace(/&#(\d+);/g, (_, m) => String.fromCharCode(parseInt(m)));
-                    responseText = responseText.replace(/&#x([\da-f]+);/g, (_, m) => String.fromCharCode(parseInt(m, 16)));
-                    responseText += '\n' + cleanedURL;
+                    responseText = await getTitle(cleanedURL);
                 } catch (err) {
                     console.log(err);
-                    responseText = '[Failed to extract title]\n' + cleanedURL;
+                    responseText = '[Failed to extract title]';
                 }
+                responseText += '\n' + cleanedURL;
             } else {
                 responseText = cleanedURL;
             }

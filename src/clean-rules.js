@@ -605,6 +605,7 @@ export default [
             'apptime',
             'author_share',
             'ignoreEngage',
+            'exSource',
         ])),
     },
     {
