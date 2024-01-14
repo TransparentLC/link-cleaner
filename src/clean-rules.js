@@ -323,7 +323,7 @@ export default [
     },
     {
         name: 'Bilibili video',
-        match: matchFactory.hostpathRegex('www.bilibili.com', /^\/video\/[Bb][Vv][A-HJ-NP-Za-km-z1-9]{10}\/?$/),
+        match: url => (url.hostname === 'www.bilibili.com' || url.hostname === 'm.bilibili.com') && /^\/video\/[Bb][Vv][A-HJ-NP-Za-km-z1-9]{10}\/?$/.test(url.pathname),
         clean: cleanFactory.chain(
             cleanFactory.whitelist(new Set),
             cleanFactory.bv2av,
