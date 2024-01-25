@@ -314,6 +314,86 @@ export default [
         },
     },
     {
+        name: 'Taobao short link',
+        match: matchFactory.hostpathRegex('m.tb.cn', /^\/h\.[\dA-Za-z]+$/),
+        clean: cleanFactory.chain(
+            cleanFactory.getRedirectFromBody(s => s.match(/var url = '(.+?)'/)[1]),
+            url => {
+                if (url.hostname.match(/^[\dA-Za-z]+\.(?:m\.)?taobao\.com$/) && url.pathname === '/') {
+                    url = cleanFactory.whitelist(new Set)(url);
+                }
+                return url;
+            },
+        ),
+    },
+    {
+        name: 'Taobao afford link',
+        match: matchFactory.hostpath('s.click.taobao.com', '/t'),
+        clean: cleanFactory.chain(
+            async url => {
+                const resp1 = await fetch(url, {
+                    redirect: 'manual',
+                    credentials: globalThis.ENV === 'cfworker' ? undefined : 'omit',
+                });
+                url = new URL((await resp1.text()).match(/var real_jump_address = '(.+?)'/)[1].replaceAll('&amp;', '&'));
+                const resp2 = await fetch(url, {
+                    redirect: 'manual',
+                    credentials: globalThis.ENV === 'cfworker' ? undefined : 'omit',
+                    headers: {
+                        Referer: 'https://s.click.taobao.com/',
+                    },
+                });
+                return globalThis.ENV === 'userscript' ? new URL(resp2.url) : (resp2.headers.has('location') ? new URL(resp2.headers.get('location')) : url);
+            },
+            cleanFactory.urlDecodeSearchParam('tar'),
+        ),
+    },
+    {
+        name: 'Taobao item link (a.m.taobao.com)',
+        match: matchFactory.hostpathRegex('a.m.taobao.com', /^\/i\d+\.htm$/),
+        clean: url => {
+            const id = url.pathname.toString().match(/^\/i(\d+)\.htm$/)[1];
+            url = new URL('https://item.taobao.com/item.htm');
+            url.searchParams.set('id', id);
+            return url;
+        },
+    },
+    {
+        name: 'Taobao item link (uland.taobao.com)',
+        match: matchFactory.chain(
+            matchFactory.hostpath('uland.taobao.com', '/coupon/edetail'),
+            matchFactory.hasSearchParam('e'),
+        ),
+        clean: cleanFactory.whitelist(new Set(['e'])),
+    },
+    {
+        name: 'Taobao item link',
+        match: matchFactory.chain(
+            url => (
+                matchFactory.hostpath('item.taobao.com', '/item.htm')(url) ||
+                matchFactory.hostpath('h5.m.taobao.com', '/awp/core/detail.htm')(url)
+            ),
+            matchFactory.hasSearchParam('id'),
+        ),
+        clean: url => {
+            const u = new URL('https://item.taobao.com/item.htm');
+            u.searchParams.set('id', url.searchParams.get('id'));
+            return u;
+        },
+    },
+    {
+        name: 'Tmall item link',
+        match: matchFactory.chain(
+            matchFactory.hostpath(new Set(['detail.tmall.com', 'detail.m.tmall.com']), '/item.htm'),
+            matchFactory.hasSearchParam('id'),
+        ),
+        clean: url => {
+            const u = new URL('https://detail.tmall.com/item.htm');
+            u.searchParams.set('id', url.searchParams.get('id'));
+            return u;
+        },
+    },
+    {
         name: 'b23.tv short link',
         match: matchFactory.hostpath('b23.tv', null),
         clean: cleanFactory.chain(
