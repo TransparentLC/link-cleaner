@@ -71,37 +71,36 @@ export default {
     /**
      * @param {URL} url
      * @returns {URL}
+     * @link https://socialsisteryi.github.io/bilibili-API-collect/docs/misc/bvid_desc.html#%E7%AE%97%E6%B3%95%E6%A6%82%E8%BF%B0
      */
-    bv2av: url => new URL(url.toString().replace(/[Bb][Vv]([A-HJ-NP-Za-km-z1-9]{10})/g, (_, bv) => {
-        const s = [9, 8, 1, 6, 2, 4, 0, 7, 3, 5];
-        const xor = 177451812n;
-        const add = 100618342136696320n;
+    bv2av: url => new URL(url.toString().replace(/[Bb][Vv]1([1-9A-HJ-NP-Za-km-z]{9})/g, (_, bv) => {
+        const bvChars = bv.split('');
+        [bvChars[0], bvChars[6]] = [bvChars[6], bvChars[0]];
+        [bvChars[1], bvChars[4]] = [bvChars[4], bvChars[1]];
         let r = 0n;
-        let b = 1n;
-        for (let i = 0; i < 10; i++) {
-            const c = bv[s[i]].charCodeAt();
-            let d = 0n;
+        for (let i = 0; i < 9; i++) {
+            r *= 58n;
+            const c = bvChars[i].charCodeAt();
+            // r += BigInt('FcwAPNKTMug3GV5Lj7EJnHpWsx4tb8haYeviqBz6rkCy12mUSDQX9RdoZf'.indexOf(c));
             if (48 <= c && c <= 57) {
-                d = [
-                    0n,  13n, 12n, 46n, 31n, 43n, 18n, 40n, 28n, 5n,
+                r += [
+                    -1n, 44n, 45n, 11n, 26n, 14n, 39n, 17n, 29n, 52n,
                 ][c - 48];
             } else if (65 <= c && c <= 90) {
-                d = [
-                    54n, 20n, 15n, 8n,  39n, 57n, 45n, 36n, 0n,  38n,
-                    51n, 42n, 49n, 52n, 0n,  53n, 7n,  4n,  9n,  50n,
-                    10n, 44n, 34n, 6n,  25n, 1n,
+                r += [
+                     3n, 37n, 42n, 49n, 18n,  0n, 12n, 21n, -1n, 19n,
+                     6n, 15n,  8n,  5n, -1n,  4n, 50n, 53n, 48n,  7n,
+                    47n, 13n, 23n, 51n, 32n, 56n,
                 ][c - 65];
             } else if (97 <= c && c <= 122) {
-                d = [
-                    26n, 29n, 56n, 3n,  24n, 0n,  47n, 27n, 22n, 41n,
-                    16n, 0n,  11n, 37n, 2n,  35n, 21n, 17n, 33n, 30n,
-                    48n, 23n, 55n, 32n, 14n, 19n,
+                r += [
+                    31n, 28n,  1n, 54n, 33n, 57n, 10n, 30n, 35n, 16n,
+                    41n, -1n, 46n, 20n, 55n, 22n, 36n, 40n, 24n, 27n,
+                     9n, 34n,  2n, 25n, 43n, 38n,
                 ][c - 97];
             }
-            r += d * b;
-            b *= 58n;
         }
-        return `av${(r - add) ^ xor}`;
+        return `av${(r & 2251799813685247n) ^ 23442827791579n}`;
     })),
     /**
      * @param {URL} url
