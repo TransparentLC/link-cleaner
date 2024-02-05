@@ -40,7 +40,7 @@
             <li>阻碍用户直达目标网页的“超不链接”
                 <ul>
                     <li>清洗前：<code>https://link.zhihu.com/?target=https%3A//example.com</code></li>
-                    <li>清洗后：<code>https://example.com</code></li>
+                    <li>清洗后：<code>https://example.com/</code></li>
                 </ul>
             </li>
             <li>带有跟踪参数的链接
@@ -65,10 +65,17 @@
         <p>脚本会对网页上所有 <code>&lt;a&gt;</code> 标签指向的链接进行清洗。如果你当前打开的页面的 URL 本身可以被清洗，则脚本也会自动跳转到清洗过的 URL。</p>
         <p>此外，也可以在菜单中选择手动清洗网页上的所有链接（用于动态添加 <code>&lt;a&gt;</code> 标签的情况）。</p>
         <h4>Cloudflare Workers</h4>
-        <p><code>https://i.akarin.dev/link-cleaner/?url=https://example.com</code></p>
-        <p><code>https://i.akarin.dev/link-cleaner/?title&amp;url=https://example.com</code></p>
+        <p><code>https://i.akarin.dev/link-cleaner/?url=https://example.com/</code></p>
+        <p><code>https://i.akarin.dev/link-cleaner/?title&amp;url=https://example.com/</code></p>
         <p>使用 <code>url</code> 参数输入链接，将返回清洗后的结果。</p>
         <p>如果需要获取这个链接对应的网页的标题（<code>&lt;title&gt;</code>），可以在请求时添加 <code>title</code> 参数。</p>
+        <p>也可以使用 <code>POST</code> 发送带有链接的文本，将文本中的链接清洗后返回。</p>
+        <p><pre><code>curl \
+    --data-raw \
+    "【淘宝】https://m.tb.cn/h.5Iub7ZVrhwMSERL?sm=xxxxxx?tk=xxxxxxxxxxx ZH4920 「【AmiAmi】Gift 东方 古明地恋 古明地觉 东风谷早苗 fumo」点击链接直接打开 或者 淘宝搜索直接打开" \
+    https://i.akarin.dev/link-cleaner/
+
+# 【淘宝】https://item.taobao.com/item.htm?id=754327895246 ZH4920 「【AmiAmi】Gift 东方 古明地恋 古明地觉 东风谷早苗 fumo」点击链接直接打开 或者 淘宝搜索直接打开</code></pre></p>
         <hr>
         <footer style="text-align:center;margin:1rem 0">
             <small>© 2024 <a href="https://akarin.dev" rel="noreferrer noopener" target="_blank">✨小透明・宸✨</a></small>

@@ -6,7 +6,7 @@
 
 * 阻碍用户直达目标网页的“超不链接”
     * 清洗前：`https://link.zhihu.com/?target=https%3A//example.com`
-    * 清洗后：`https://example.com`
+    * 清洗后：`https://example.com/`
 * 带有跟踪参数的链接
     * 清洗前：`https://b23.tv/r15682i`（此链接将跳转到 `https://www.bilibili.com/video/BV16u411Z7Pj?p=1&share_medium=android&share_plat=android&share_session_id=439a9ce3-414e-4606-98d6-a0098e305a46&share_source=COPY&share_tag=s_i&timestamp=1652639989&unique_k=r15682i`）
     * 清洗后：`https://www.bilibili.com/video/av506045471`
@@ -28,13 +28,24 @@ https://i.akarin.dev/link-cleaner.user.js
 
 ### Cloudflare Workers
 
-https://i.akarin.dev/link-cleaner/?url=https://example.com
+https://i.akarin.dev/link-cleaner/?url=https://example.com/
 
-https://i.akarin.dev/link-cleaner/?title&url=https://example.com
+https://i.akarin.dev/link-cleaner/?title&url=https://example.com/
 
 使用 `url` 参数输入链接，将返回清洗后的结果。
 
 如果需要获取这个链接对应的网页的标题（`<title>`），可以在请求时添加 `title` 参数。
+
+也可以使用 `POST` 发送带有链接的文本，将文本中的链接清洗后返回。
+
+```sh
+curl \
+    --data-raw \
+    "【淘宝】https://m.tb.cn/h.5Iub7ZVrhwMSERL?sm=xxxxxx?tk=xxxxxxxxxxx ZH4920 「【AmiAmi】Gift 东方 古明地恋 古明地觉 东风谷早苗 fumo」点击链接直接打开 或者 淘宝搜索直接打开" \
+    https://i.akarin.dev/link-cleaner/
+
+# 【淘宝】https://item.taobao.com/item.htm?id=754327895246 ZH4920 「【AmiAmi】Gift 东方 古明地恋 古明地觉 东风谷早苗 fumo」点击链接直接打开 或者 淘宝搜索直接打开
+```
 
 ## 自行修改
 
