@@ -410,6 +410,23 @@ export default [
         ),
     },
     {
+        name: 'Douyin short link',
+        match: matchFactory.hostpathRegex('v.douyin.com', /^\/[\dA-Za-z]+\/?$/),
+        clean: cleanFactory.chain(
+            cleanFactory.getRedirect,
+            url => {
+                let m ;
+                if (m = url.pathname.match(/^\/share\/video\/(\d+)\/?$/)) {
+                    return new URL(`https://www.douyin.com/video/${m[1]}`);
+                }
+                if (m = url.pathname.match(/^\/share\/user\/([\dA-Za-z-]+)\/?$/)) {
+                    return new URL(`https://www.douyin.com/user/${m[1]}`);
+                }
+                return url;
+            }
+        )
+    },
+    {
         name: 'Douyin link',
         match: matchFactory.hostpath('www.douyin.com', null),
         clean: cleanFactory.blacklist(new Set([
