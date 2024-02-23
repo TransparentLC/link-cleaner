@@ -20,8 +20,10 @@ esbuild.buildSync({
             // @downloadURL https://i.akarin.dev/link-cleaner.user.js
             // @match       *://*/*
             // @connect     *
+            // @grant       GM_getValue
             // @grant       GM_registerMenuCommand
             // @grant       GM_setClipboard
+            // @grant       GM_setValue
             // @grant       GM_xmlhttpRequest
             // ==/UserScript==
             /* eslint-disable */
