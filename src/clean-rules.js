@@ -703,6 +703,7 @@ export default [
             'author_share',
             'ignoreEngage',
             'exSource',
+            'shareRedId',
         ])),
     },
     {
