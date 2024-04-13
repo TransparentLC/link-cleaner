@@ -707,6 +707,11 @@ export default [
         ])),
     },
     {
+        name: 'Xiaohongshu (xhslink)',
+        match: matchFactory.hostpathRegex('xhslink.com', /^\/[\da-zA-Z]{6}$/),
+        clean: cleanFactory.getRedirect,
+    },
+    {
         name: 'Vultr email link',
         match: matchFactory.hostpathRegex('experience.getvultr.com', /^\/[\dA-Za-z-_]+=*$/),
         clean: cleanFactory.chain(
