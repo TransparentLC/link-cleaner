@@ -35,6 +35,7 @@ export default [
             'utm_medium',
             'utm_campaign',
             'utm_content',
+            'utm_id',
             'utm_term',
             'utm_member',
             'utm_name',
@@ -62,6 +63,7 @@ export default [
             'utm_medium',
             'utm_campaign',
             'utm_content',
+            'utm_id',
             'utm_term',
             'utm_member',
             'utm_name',
@@ -468,6 +470,14 @@ export default [
         name: 'Yinxiang link',
         match: matchFactory.hostpath('app.yinxiang.com', '/OutboundRedirect.action'),
         clean: cleanFactory.urlDecodeSearchParam('dest'),
+    },
+    {
+        name: 'AMap link',
+        match: matchFactory.hostpathRegex('surl.amap.com', /^\/[\da-zA-Z]+?$/),
+        clean: cleanFactory.chain(
+            cleanFactory.getRedirect,
+            cleanFactory.whitelist(new Set(['p'])),
+        ),
     },
     {
         name: 'QQ middlem',
