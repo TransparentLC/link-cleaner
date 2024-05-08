@@ -25,9 +25,12 @@ export const cleanLink = async (url, verbose = false) => {
 export const getTitle = async url => {
     const body = await fetch(url, {
         headers: {
-            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:123.0) Gecko/20100101 Firefox/123.0',
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:125.0) Gecko/20100101 Firefox/125.0',
         },
-    }).then(r => r.text());
+    }).then(r => {
+        if (r.status >= 400) throw new Error(`${r.status} ${r.statusText}`);
+        return r.text();
+    });
     let title = body.match(/<title(?: .+?)?>(.+?)<\/title>/)[1].trim()
     for (const [entity, decoded] of [
         ['&amp;', '&'],

@@ -23,7 +23,7 @@ addEventListener('fetch', e => e.respondWith(
                             responseText = await getTitle(cleanedURL);
                         } catch (err) {
                             console.log(err);
-                            responseText = '[Failed to extract title]';
+                            responseText = `[Failed to extract title: ${err}]`;
                         }
                         responseText += '\n' + cleanedURL;
                     } else {
