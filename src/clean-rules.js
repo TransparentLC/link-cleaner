@@ -706,19 +706,7 @@ export default [
     {
         name: 'Xiaohongshu',
         match: matchFactory.hostpathRegex('www.xiaohongshu.com', /^\/(?:discovery\/item|explore)\/[\da-f]+$/),
-        clean: cleanFactory.blacklist(new Set([
-            'app_platform',
-            'app_version',
-            'share_from_user_hidden',
-            'type',
-            'xhsshare',
-            'appuid',
-            'apptime',
-            'author_share',
-            'ignoreEngage',
-            'exSource',
-            'shareRedId',
-        ])),
+        clean: cleanFactory.whitelist(new Set),
     },
     {
         name: 'Xiaohongshu (xhslink)',
