@@ -50,16 +50,16 @@ cleanLink(location.href).then(e => {
 
 // 处理fetch和XMLHttpRequest（使用xhook）
 
-if (GM_getValue('xhookEnabled')) {
+if (GM.getValue('xhookEnabled')) {
     (async () => {
         /** @type {String} */
         let xhookScript;
-        if (GM_getValue('xhookCacheBefore', 0) < Date.now() || !(xhookScript = GM_getValue('xhookCached'))) {
+        if (GM.getValue('xhookCacheBefore', 0) < Date.now() || !(xhookScript = GM.getValue('xhookCached'))) {
             console.log('Link cleaner:', 'Fetching xhook from jsdelivr ...');
-            GM_setValue('xhookCached', (xhookScript = await fetch('https://cdn.jsdelivr.net/npm/xhook@1/dist/xhook.min.js').then(r => r.text())));
-            GM_setValue('xhookCacheBefore', Date.now() + 6048e5); // 86400 * 7 * 1000
+            GM.setValue('xhookCached', (xhookScript = await fetch('https://cdn.jsdelivr.net/npm/xhook@1/dist/xhook.min.js').then(r => r.text())));
+            GM.setValue('xhookCacheBefore', Date.now() + 6048e5); // 86400 * 7 * 1000
         } else {
-            console.log('Link cleaner:', 'Loading xhook from cache ...', 'Expire:', new Date(GM_getValue('xhookCacheBefore')));
+            console.log('Link cleaner:', 'Loading xhook from cache ...', 'Expire:', new Date(GM.getValue('xhookCacheBefore')));
         }
         // Shamefully use eval to run code from string
         (0, unsafeWindow.eval)(xhookScript);
@@ -81,13 +81,13 @@ if (GM_getValue('xhookEnabled')) {
 
 // 添加右键菜单
 
-GM_registerMenuCommand('手动输入链接进行清洗', async () => {
+GM.registerMenuCommand('手动输入链接进行清洗', async () => {
     const url = prompt('请输入需要清洗的链接：');
     if (!url) return;
     try {
         const cleaned = await cleanLink(url);
         if (cleaned !== url) {
-            confirm('链接已清洗，是否需要复制？\n' + cleaned) && GM_setClipboard(cleaned);
+            confirm('链接已清洗，是否需要复制？\n' + cleaned) && GM.setClipboard(cleaned);
         } else {
             alert('链接无需清洗。');
         }
@@ -96,7 +96,15 @@ GM_registerMenuCommand('手动输入链接进行清洗', async () => {
     }
 });
 
-GM_registerMenuCommand('重新清洗网页上的所有链接', () => Array.from(document.querySelectorAll('a')).forEach(cleanLinkForDOM));
-GM_registerMenuCommand('复制标题和网址', () => GM_setClipboard(`${document.title.trim()}\n${location.href}`));
-GM_registerMenuCommand('复制标题和网址（Markdown）', () => GM_setClipboard(`[${document.title.trim()}](${location.href})`));
-GM_registerMenuCommand('增强清洗模式（xhr/fetch请求，切换后刷新生效）' + (GM_getValue('xhookEnabled') ? '✅' : '❌'), () => GM_setValue('xhookEnabled', !GM_getValue('xhookEnabled')));
+GM.registerMenuCommand('重新清洗网页上的所有链接', () => Array.from(document.querySelectorAll('a')).forEach(cleanLinkForDOM));
+GM.registerMenuCommand('复制标题和网址', () => {
+    const text = `${document.title.trim()}\n${location.href}`;
+    GM.setClipboard(text);
+    alert(`已复制：\n${text}`);
+});
+GM.registerMenuCommand('复制标题和网址（Markdown）', () => {
+    const text = `[${document.title.trim()}](${location.href})`;
+    GM.setClipboard(text);
+    alert(`已复制：\n${text}`);
+});
+GM.registerMenuCommand('增强清洗模式（xhr/fetch请求，切换后刷新生效）' + (GM.getValue('xhookEnabled') ? '✅' : '❌'), () => GM.setValue('xhookEnabled', !GM.getValue('xhookEnabled')));
