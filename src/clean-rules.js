@@ -298,6 +298,11 @@ export default [
         clean: url => cleanFactory.urlDecodeSearchParam(url.searchParams.has('u') ? 'u' : 'toasturl')(url),
     },
     {
+        name: 'Weibo link',
+        match: matchFactory.hostpathRegex('weibo.com', /^\/\d+\/\d+$/),
+        clean: cleanFactory.whitelist(new Set),
+    },
+    {
         name: 't.cn short link',
         match: matchFactory.hostpath('t.cn', null),
         clean: cleanFactory.getRedirect,
