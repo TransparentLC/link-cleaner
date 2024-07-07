@@ -49,17 +49,18 @@ cleanLink(location.href).then(e => {
 });
 
 // 处理fetch和XMLHttpRequest（使用xhook）
+(async () => {
 
-if (GM.getValue('xhookEnabled')) {
+if (await GM.getValue('xhookEnabled')) {
     (async () => {
         /** @type {String} */
         let xhookScript;
-        if (GM.getValue('xhookCacheBefore', 0) < Date.now() || !(xhookScript = GM.getValue('xhookCached'))) {
+        if (await GM.getValue('xhookCacheBefore', 0) < Date.now() || !(xhookScript = await GM.getValue('xhookCached'))) {
             console.log('Link cleaner:', 'Fetching xhook from jsdelivr ...');
-            GM.setValue('xhookCached', (xhookScript = await fetch('https://cdn.jsdelivr.net/npm/xhook@1/dist/xhook.min.js').then(r => r.text())));
-            GM.setValue('xhookCacheBefore', Date.now() + 6048e5); // 86400 * 7 * 1000
+            await GM.setValue('xhookCached', (xhookScript = await fetch('https://cdn.jsdelivr.net/npm/xhook@1/dist/xhook.min.js').then(r => r.text())));
+            await GM.setValue('xhookCacheBefore', Date.now() + 6048e5); // 86400 * 7 * 1000
         } else {
-            console.log('Link cleaner:', 'Loading xhook from cache ...', 'Expire:', new Date(GM.getValue('xhookCacheBefore')));
+            console.log('Link cleaner:', 'Loading xhook from cache ...', 'Expire:', new Date(await GM.getValue('xhookCacheBefore')));
         }
         // Shamefully use eval to run code from string
         (0, unsafeWindow.eval)(xhookScript);
@@ -108,3 +109,5 @@ GM.registerMenuCommand('复制标题和网址（Markdown）', () => {
     alert(`已复制：\n${text}`);
 });
 GM.registerMenuCommand('增强清洗模式（xhr/fetch请求，切换后刷新生效）' + (GM.getValue('xhookEnabled') ? '✅' : '❌'), () => GM.setValue('xhookEnabled', !GM.getValue('xhookEnabled')));
+
+})()
