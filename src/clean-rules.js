@@ -711,7 +711,7 @@ export default [
     {
         name: 'Xiaohongshu',
         match: matchFactory.hostpathRegex('www.xiaohongshu.com', /^\/(?:discovery\/item|explore)\/[\da-f]+$/),
-        clean: cleanFactory.whitelist(new Set),
+        clean: cleanFactory.whitelist(new Set(['xsec_token'])),
     },
     {
         name: 'Xiaohongshu (xhslink)',
