@@ -519,6 +519,11 @@ export default [
         clean: cleanFactory.urlDecodeSearchParam('href'),
     },
     {
+        name: 'ITHome link',
+        match: matchFactory.hostpath('img.ithome.com', '/app/redirect/index.html'),
+        clean: cleanFactory.urlDecodeSearchParam('url'),
+    },
+    {
         name: 'SMZDM afford',
         match: matchFactory.hostpathRegex('go.smzdm.com', /^\/[\da-f]{16}\/.+?$/),
         clean: cleanFactory.chain(
