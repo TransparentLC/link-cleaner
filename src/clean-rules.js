@@ -137,8 +137,13 @@ export default [
         clean: cleanFactory.urlDecodeSearchParam('target'),
     },
     {
-        name: 'Shimo link',
+        name: 'Shimo link (black)',
         match: matchFactory.hostpath('shimo.im', '/outlink/black'),
+        clean: cleanFactory.urlDecodeSearchParam('url'),
+    },
+    {
+        name: 'Shimo link (gray)',
+        match: matchFactory.hostpath('shimo.im', '/outlink/gray'),
         clean: cleanFactory.urlDecodeSearchParam('url'),
     },
     {
@@ -720,7 +725,7 @@ export default [
     },
     {
         name: 'Xiaohongshu (xhslink)',
-        match: matchFactory.hostpathRegex('xhslink.com', /^\/[\da-zA-Z]{6}$/),
+        match: matchFactory.hostpath('xhslink.com', null),
         clean: cleanFactory.getRedirect,
     },
     {
