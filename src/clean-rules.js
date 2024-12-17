@@ -843,4 +843,14 @@ export default [
         ),
         clean: cleanFactory.blacklist(new Set(['code', 'affid'])),
     },
+    {
+        name: 'Qzone link',
+        match: matchFactory.hostpath('mobile.qzone.qq.com', '/l'),
+        clean: url => {
+            const u = new URL('https://h5.qzone.qq.com/ugc/share/');
+            u.searchParams.set('sharetag', url.searchParams.get('sharetag'));
+            u.searchParams.set('appid', url.searchParams.get('a'));
+            return u;
+        },
+    },
 ];
