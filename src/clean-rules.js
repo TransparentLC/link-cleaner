@@ -410,8 +410,8 @@ export default [
         },
     },
     {
-        name: 'b23.tv/bili2233.cn short link',
-        match: matchFactory.hostpath(new Set(['b23.tv', 'bili2233.cn']), null),
+        name: 'Bilibili short link',
+        match: matchFactory.hostpath(new Set(['b23.tv', 'bili2233.cn', 'bili22.cn', 'bili33.cn', 'bili23.cn',]), null),
         clean: cleanFactory.chain(
             cleanFactory.getRedirect,
             cleanFactory.blacklist(new Set(['timestamp'])),
