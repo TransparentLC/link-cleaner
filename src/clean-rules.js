@@ -102,6 +102,11 @@ export default [
         clean: cleanFactory.urlDecodeSearchParam('target'),
     },
     {
+        name: 'Aliyun developer',
+        match: matchFactory.hostpath('developer.aliyun.com', '/redirect'),
+        clean: cleanFactory.urlDecodeSearchParam('target'),
+    },
+    {
         name: 'Kook/Kaihela link',
         match: matchFactory.hostpath(new Set(['www.kookapp.cn', 'www.kaiheila.cn']), '/go-wild.html'),
         clean: cleanFactory.urlDecodeSearchParam('url'),
@@ -228,6 +233,11 @@ export default [
             url => url.searchParams.get('t') === 'safety',
         ),
         clean: cleanFactory.urlDecodeSearchParam('gourl'),
+    },
+    {
+        name: 'QQ mail link',
+        match: matchFactory.hostpath('wx.mail.qq.com', '/xmspamcheck/xmsafejump'),
+        clean: cleanFactory.urlDecodeSearchParam('url'),
     },
     {
         name: 'QQ docs link',
@@ -526,6 +536,11 @@ export default [
     {
         name: 'ITHome link',
         match: matchFactory.hostpath('img.ithome.com', '/app/redirect/index.html'),
+        clean: cleanFactory.urlDecodeSearchParam('url'),
+    },
+    {
+        name: 'LaTeX studio',
+        match: matchFactory.hostpath('ask.latexstudio.net', '/go/index'),
         clean: cleanFactory.urlDecodeSearchParam('url'),
     },
     {
