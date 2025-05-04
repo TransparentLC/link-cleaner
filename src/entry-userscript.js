@@ -83,6 +83,7 @@ if (await GM.getValue('xhookEnabled')) {
 // 添加右键菜单
 
 GM.registerMenuCommand('手动输入链接进行清洗', async () => {
+    if (window.top !== window.self) return;
     const url = prompt('请输入需要清洗的链接：');
     if (!url) return;
     try {
@@ -99,15 +100,17 @@ GM.registerMenuCommand('手动输入链接进行清洗', async () => {
 
 GM.registerMenuCommand('重新清洗网页上的所有链接', () => Array.from(document.querySelectorAll('a')).forEach(cleanLinkForDOM));
 GM.registerMenuCommand('复制标题和网址', () => {
+    if (window.top !== window.self) return;
     const text = `${document.title.trim()}\n${location.href}`;
     GM.setClipboard(text);
     alert(`已复制：\n${text}`);
 });
 GM.registerMenuCommand('复制标题和网址（Markdown）', () => {
+    if (window.top !== window.self) return;
     const text = `[${document.title.trim()}](${location.href})`;
     GM.setClipboard(text);
     alert(`已复制：\n${text}`);
 });
-GM.registerMenuCommand('增强清洗模式（xhr/fetch请求，切换后刷新生效）' + (GM.getValue('xhookEnabled') ? '✅' : '❌'), () => GM.setValue('xhookEnabled', !GM.getValue('xhookEnabled')));
+GM.registerMenuCommand('增强清洗模式（xhr/fetch请求，切换后刷新生效）' + (await GM.getValue('xhookEnabled') ? '✅' : '❌'), async () => GM.setValue('xhookEnabled', !(await GM.getValue('xhookEnabled'))));
 
 })()
