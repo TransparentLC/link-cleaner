@@ -341,7 +341,7 @@ export default [
     },
     {
         name: 'Taobao short link',
-        match: matchFactory.hostpathRegex('m.tb.cn', /^\/h\.[\dA-Za-z]+$/),
+        match: matchFactory.hostpathRegex('e.tb.cn', /^\/h\.[\dA-Za-z]+$/),
         clean: cleanFactory.chain(
             cleanFactory.getRedirectFromBody(s => s.match(/var url = '(.+?)'/)[1]),
             url => {
