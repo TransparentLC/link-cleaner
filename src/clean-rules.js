@@ -266,7 +266,7 @@ export default [
     },
     {
         name: 'Hellogithub link',
-        match: matchFactory.hostpath('hellogithub.com', '/periodical/statistics/click/'),
+        match: matchFactory.hostpathRegex('hellogithub.com', /^\/periodical\/statistics\/click\/?$/),
         clean: cleanFactory.urlDecodeSearchParam('target'),
     },
     {
