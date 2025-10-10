@@ -1,0 +1,21 @@
+[build]
+  functions = "netlify/functions"
+  publish = "src"
+
+[[redirects]]
+  from = "/"
+  to = "/index-netlify.html"
+  status = 200
+
+[[redirects]]
+  from = "/link-cleaner/"
+  to = "/.netlify/functions/entry-netlify"
+  status = 200
+
+[[redirects]]
+  from = "/link-cleaner/*"
+  to = "/.netlify/functions/entry-netlify"
+  status = 200
+
+[functions]
+  node_bundler = "esbuild"
