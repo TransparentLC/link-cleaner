@@ -526,7 +526,7 @@ export default [
     {
         name: 'Weixin article',
         match: matchFactory.hostpath('mp.weixin.qq.com', '/s'),
-        clean: cleanFactory.whitelist(new Set(['__biz', 'mid', 'idx', 'sn', 'tempkey'])),
+        clean: cleanFactory.whitelist(new Set(['__biz', 'mid', 'idx', 'sn', 'tempkey', 'poc_token'])),
     },
     {
         name: 'Weixin developers link',
