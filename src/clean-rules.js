@@ -245,8 +245,8 @@ export default [
         clean: cleanFactory.urlDecodeSearchParam('url'),
     },
     {
-        name: 'QQ support link',
-        match: matchFactory.hostpathRegex('support.qq.com', /^\/products\/\d+\/link-jump$/),
+        name: 'Tencent TXC link',
+        match: matchFactory.hostpathRegex('txc.qq.com', /^\/products\/\d+\/link-jump$/),
         clean: cleanFactory.urlDecodeSearchParam('jump'),
     },
     {
