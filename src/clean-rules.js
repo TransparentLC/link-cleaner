@@ -868,4 +868,9 @@ export default [
             return u;
         },
     },
+    {
+        name: 'NodeSeek link',
+        match: matchFactory.hostpath('www.nodeseek.com', '/jump'),
+        clean: cleanFactory.urlDecodeSearchParam('to'),
+    },
 ];
