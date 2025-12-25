@@ -5,7 +5,7 @@ import cleanFactory from './clean-factory.js';
  * @typedef {import('./match-factory.js').matchFunction} matchFunction
  * @typedef {import('./clean-factory.js').cleanFunction} cleanFunction
  * @typedef {{
- *  name: String,
+ *  name?: String,
  *  match: matchFunction,
  *  clean: cleanFunction,
  * }} cleanRule
@@ -872,5 +872,36 @@ export default [
         name: 'NodeSeek link',
         match: matchFactory.hostpath('www.nodeseek.com', '/jump'),
         clean: cleanFactory.urlDecodeSearchParam('to'),
+    },
+    {
+        match: matchFactory.hostpath('www.xgw4.com', '/qqdl.html'),
+        clean: cleanFactory.base64DecodeSearchParam('url'),
+    },
+    {
+        match: matchFactory.hostpath('cnb.cool', '/110'),
+        clean: cleanFactory.urlDecodeSearchParam('url'),
+    },
+    {
+        match: matchFactory.hostpath('api.himcbbs.com', '/refer/'),
+        clean: cleanFactory.urlDecodeSearchParam('url'),
+    },
+    {
+        match: matchFactory.hostpath('www.iplaysoft.com', '/link/'),
+        clean: url => new URL(atob(
+            url.searchParams.get('url')
+                .match(/([A-Za-z\d\-_]{1,6})/g)
+                .map(e => e.length === 6 ? e.split('').reverse().join('') : e)
+                .join('')
+                .replaceAll('_', '/')
+                .replaceAll('-', '+')
+        )),
+    },
+    {
+        match: matchFactory.hostpathRegex('link.mcmod.cn', /^\/target\/[A-Za-z\d\/\+]+=*$/),
+        clean: url => new URL(atob(url.pathname.replace(/^\/target\//, ''))),
+    },
+    {
+        match: matchFactory.hostpath('www.mczwlt.net', '/go-external'),
+        clean: cleanFactory.urlDecodeSearchParam('url'),
     },
 ];
