@@ -82,6 +82,39 @@
         </footer>
     </main>
 
+<!-- 模态窗口 -->
+<dialog id="modal" style="border:none;border-radius:8px;padding:0;max-width:90vw;width:500px;box-shadow:0 4px 24px rgba(0,0,0,0.2)">
+    <div style="padding:1.5rem">
+        <h3 style="margin:0 0 1rem 0">检测到多个链接，请选择一个</h3>
+        <div id="url-list" style="max-height:300px;overflow-y:auto"></div>
+        <div style="display:flex;justify-content:flex-end;gap:.5rem;margin-top:1rem">
+            <button id="modal-cancel" style="background:var(--border)">取消</button>
+            <button id="modal-clean">清洗</button>
+        </div>
+    </div>
+</dialog>
+
+<style>
+    #url-list label {
+        display:block;
+        padding:.5rem;
+        margin:.25rem 0;
+        border-radius:4px;
+        cursor:pointer;
+        word-break:break-all;
+        background:var(--accent-bg);
+    }
+    #url-list label:hover {
+        background:var(--border);
+    }
+    #url-list input[type="radio"] {
+        margin-right:.5rem;
+    }
+    dialog::backdrop {
+        background:rgba(0,0,0,0.5);
+    }
+</style>
+
 <script>
     (() => {
         const getElementById = e => document.getElementById(e);
@@ -90,9 +123,27 @@
         const $copy = getElementById('copy');
         const $title = getElementById('title');
         const $cleaned = getElementById('cleaned');
+        const $modal = getElementById('modal');
+        const $urlList = getElementById('url-list');
+        const $modalCancel = getElementById('modal-cancel');
+        const $modalClean = getElementById('modal-clean');
 
-        $clean.onclick = () => {
-            if (!$text.value) return;
+        // 从文本中提取所有 URL
+        const extractUrls = text => {
+            const urlRegex = /https?:\/\/[^\s<>"{}|\\^`\[\]]+/gi;
+            const matches = text.match(urlRegex) || [];
+            // 去重
+            return [...new Set(matches)];
+        };
+
+        // 检测是否为纯 URL（去除首尾空白后）
+        const isPureUrl = text => {
+            const trimmed = text.trim();
+            return /^https?:\/\/[^\s]+$/.test(trimmed) && !trimmed.includes(' ');
+        };
+
+        // 执行清洗请求
+        const doClean = url => {
             $clean.setAttribute('disabled', '');
             
             const u = new URL(location.href);
@@ -101,7 +152,7 @@
             
             const requestUrl = new URL(cleanerUrl);
             requestUrl.searchParams.set('title', '');
-            requestUrl.searchParams.set('url', $text.value);
+            requestUrl.searchParams.set('url', url);
             
             fetch(requestUrl)
                 .then(r => {
@@ -118,6 +169,62 @@
                     $cleaned.href = $cleaned.innerText = '';
                 })
                 .finally(() => $clean.removeAttribute('disabled'));
+        };
+
+        // 显示模态窗口
+        const showModal = urls => {
+            $urlList.innerHTML = urls.map((url, i) => `
+                <label>
+                    <input type="radio" name="selected-url" value="${url}" ${i === 0 ? 'checked' : ''}>
+                    ${url}
+                </label>
+            `).join('');
+            $modal.showModal();
+        };
+
+        $clean.onclick = () => {
+            if (!$text.value) return;
+            
+            const inputText = $text.value;
+            
+            // 检查是否为纯 URL
+            if (isPureUrl(inputText)) {
+                doClean(inputText.trim());
+                return;
+            }
+            
+            // 提取 URL
+            const urls = extractUrls(inputText);
+            
+            if (urls.length === 0) {
+                $title.innerText = '未检测到有效链接';
+                $cleaned.href = $cleaned.innerText = '';
+                return;
+            }
+            
+            if (urls.length === 1) {
+                // 只有一个 URL，直接清洗
+                doClean(urls[0]);
+                return;
+            }
+            
+            // 多个 URL，显示模态窗口
+            showModal(urls);
+        };
+
+        $modalCancel.onclick = () => $modal.close();
+
+        $modalClean.onclick = () => {
+            const selected = $urlList.querySelector('input[name="selected-url"]:checked');
+            if (selected) {
+                $modal.close();
+                doClean(selected.value);
+            }
+        };
+
+        // 点击模态窗口背景关闭
+        $modal.onclick = e => {
+            if (e.target === $modal) $modal.close();
         };
 
         $copy.onclick = () => navigator.clipboard.writeText(`${$title.innerText}\n${$cleaned.innerText}`).then(() => alert('已复制！'));
