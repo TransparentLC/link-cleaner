@@ -904,4 +904,11 @@ export default [
         match: matchFactory.hostpath('www.mczwlt.net', '/go-external'),
         clean: cleanFactory.urlDecodeSearchParam('url'),
     },
+    {
+        match: matchFactory.chain(
+            matchFactory.hostpath('mp.weixin.qq.com', '/mp/readtemplate'),
+            url => url.searchParams.get('t') === 'pages/wapredirect',
+        ),
+        clean: cleanFactory.urlDecodeSearchParam('url'),
+    },
 ];
